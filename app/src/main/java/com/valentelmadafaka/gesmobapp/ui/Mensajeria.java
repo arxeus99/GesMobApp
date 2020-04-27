@@ -3,6 +3,7 @@ package com.valentelmadafaka.gesmobapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.valentelmadafaka.gesmobapp.R;
 
@@ -13,5 +14,8 @@ public class Mensajeria extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mensajeria);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void enviarVoid(View view) {
     }
 }
