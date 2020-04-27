@@ -21,4 +21,6 @@ public class Profesor extends Persona {
     public void setMensajes(List<Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
+
+
 }
