@@ -1,8 +1,10 @@
 package com.valentelmadafaka.gesmobapp.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.valentelmadafaka.gesmobapp.R;
 
@@ -13,5 +15,14 @@ public class TareaForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarea_form);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

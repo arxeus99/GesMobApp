@@ -1,9 +1,11 @@
 package com.valentelmadafaka.gesmobapp.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.valentelmadafaka.gesmobapp.R;
+import com.valentelmadafaka.gesmobapp.ui.TareaForm;
 
 public class HomeFragment extends Fragment {
 
@@ -23,7 +26,13 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
+        final Button crearTarea = root.findViewById(R.id.crearTareaButton);
+        crearTarea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), TareaForm.class));
+            }
+        });
         return root;
     }
 }
