@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.valentelmadafaka.gesmobapp.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_profesor"
+            app:destination="@id/nav_profesor" />
+        <action
+            android:id="@+id/action_nav_home_to_empresaFragment"
+            app:destination="@id/nav_empresa" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_ajustes"
+            app:destination="@id/nav_ajustes" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profesor"
+        android:name="com.valentelmadafaka.gesmobapp.ui.profesor.ProfesorFragment"
+        android:label="@string/menu_profesor"
+        tools:layout="@layout/fragment_profesor" />
+    <fragment
+        android:id="@+id/nav_empresa"
+        android:name="com.valentelmadafaka.gesmobapp.ui.empresa.EmpresaFragment"
+        android:label="@string/menu_empresa"
+        tools:layout="@layout/empresa_fragment" />
+    <fragment
+        android:id="@+id/nav_ajustes"
+        android:name="com.valentelmadafaka.gesmobapp.ui.ajustes.AjustesFragment"
+        android:label="ajustes_fragment"
+        tools:layout="@layout/ajustes_fragment" />
+
+</navigation>
