@@ -13,41 +13,44 @@ import org.json.JSONObject;
 
 import java.security.Policy;
 
-public class JSONHelper {
+public abstract class JSONHelper {
 
-    private GesMobDB db;
+//    private GesMobDB db;
+//
+//    public JSONHelper(Context context){
+//        this.db = new GesMobDB(context);
+//    }
 
-    public JSONHelper(Context context){
-        this.db = new GesMobDB(context);
-    }
-
-    public Alumno obtenerAlumno(String JSON) throws JSONException {
+    public static Alumno obtenerAlumno(String JSON) throws JSONException {
         JSONObject data = new JSONObject(JSON);
         Alumno alumno = new Alumno();
-        alumno.setId(data.getString("idAlumno"));
-        alumno.setNombre(data.getString("nombreAlumno"));
-        alumno.setEmail(data.getString("emailAlumno"));
-        alumno.setDireccion(data.getString("direccionAlumno"));
-        alumno.setIdProfesor("idProfesor");
-        alumno.setIdEmpresa("idEmpresa");
+        alumno.setId(data.getString("id"));
+        alumno.setNombre(data.getString("nombre"));
+        alumno.setEmail(data.getString("email"));
+        alumno.setDireccion(data.getString("direccion"));
+        alumno.setIdProfesor(data.getString("idProfesor"));
+        alumno.setIdEmpresa(data.getString("idEmpresa"));
         return alumno;
     }
 
-    public Profesor obtenerProfesor(String JSON) throws JSONException {
+    public static Profesor obtenerProfesor(String JSON) throws JSONException {
         JSONObject data = new JSONObject(JSON);
         Profesor profesor = new Profesor();
-        profesor.setId(data.getString("idProfesor"));
-        profesor.setNombre(data.getString("nombreProfesor"));
-        profesor.setEmail(data.getString("emailProfesor"));
+        profesor.setId(data.getString("id"));
+        profesor.setNombre(data.getString("nombre"));
+        profesor.setEmail(data.getString("email"));
         return profesor;
     }
 
-    public Empresa obtenerEmpresa(String JSON) throws JSONException{
+    public static Empresa obtenerEmpresa(String JSON) throws JSONException{
         JSONObject data = new JSONObject(JSON);
         Empresa empresa = new Empresa();
-        empresa.setId(data.getString("idEmpresa"));
-        empresa.setNombre(data.getString("nombreEmpresa"));
-        empresa.setEmail(data.getString("emailEmpresa"));
+        empresa.setId(data.getString("id"));
+        empresa.setNombre(data.getString("nombre"));
+        empresa.setEmail(data.getString("email"));
+        empresa.setDireccion(data.getString("direccion"));
+        empresa.setWeb(data.getString("web"));
+        empresa.setTelefono(data.getString("telefono"));
         return empresa;
     }
 }

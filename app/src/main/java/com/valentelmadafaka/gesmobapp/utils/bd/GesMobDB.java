@@ -46,12 +46,16 @@ public class GesMobDB {
     public static final String EMPRESA_NOMBRE = "nombre";
     public static final String EMPRESA_EMAIL = "email";
     public static final String EMPRESA_DIRECCION = "direccion";
+    public static final String EMPRESA_WEB = "web";
+    public static final String EMPRESA_TELEFONO = "telefono";
     public static final String CREATE_TABLE_EMPRESA = "create table " + TAB_EMPRESA +
             "("
             + EMPRESA_ID + " integer primary key, "
             + EMPRESA_NOMBRE + " text not null, "
             + EMPRESA_EMAIL + " text not null, "
-            + EMPRESA_DIRECCION + " text not null)";
+            + EMPRESA_DIRECCION + " text not null, "
+            + EMPRESA_WEB + " text not null, "
+            + EMPRESA_TELEFONO + " text not null)";
     public static final String TAB_TAREA = "tarea";
     public static final String TAREA_ID = "id";
     public static final String TAREA_NOMBRE = "nombre";
@@ -148,11 +152,13 @@ public class GesMobDB {
         contentValues.put(EMPRESA_NOMBRE, empresa.getNombre());
         contentValues.put(EMPRESA_EMAIL, empresa.getEmail());
         contentValues.put(EMPRESA_DIRECCION, empresa.getDireccion());
+        contentValues.put(EMPRESA_WEB, empresa.getWeb());
+        contentValues.put(EMPRESA_TELEFONO, empresa.getTelefono());
         return bd.insert(TAB_EMPRESA, null, contentValues);
     }
 
     public Cursor obtenerEmpresa(long id){
-        Cursor cursor = bd.query(true, TAB_EMPRESA, new String[]{EMPRESA_ID, EMPRESA_NOMBRE, EMPRESA_EMAIL, EMPRESA_DIRECCION}, EMPRESA_ID + " = " + id, null, null, null, null, null);
+        Cursor cursor = bd.query(true, TAB_EMPRESA, new String[]{EMPRESA_ID, EMPRESA_NOMBRE, EMPRESA_EMAIL, EMPRESA_DIRECCION, EMPRESA_WEB, EMPRESA_TELEFONO}, EMPRESA_ID + " = " + id, null, null, null, null, null);
         return cursor;
     }
 

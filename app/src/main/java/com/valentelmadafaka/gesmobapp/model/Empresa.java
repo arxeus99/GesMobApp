@@ -5,6 +5,24 @@ public class Empresa {
     private String nombre;
     private String email;
     private String direccion;
+    private String web;
+    private String telefono;
+
+    public String getWeb() {
+        return web;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
     public String getId() {
         return id;
