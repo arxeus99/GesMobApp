@@ -2,7 +2,7 @@ package com.valentelmadafaka.gesmobapp.model;
 
 import java.util.List;
 
-class Tarea {
+public class Tarea {
 
     private String id;
     private String nombre;
@@ -11,6 +11,24 @@ class Tarea {
     private int horas;
     private boolean realizada;
     private List<Observacion> observaciones;
+    private Alumno alumno;
+    private Profesor profesor;
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
 
     public String getId() {
         return id;

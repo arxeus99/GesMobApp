@@ -1,6 +1,6 @@
 package com.valentelmadafaka.gesmobapp.model;
 
-class Empresa {
+public class Empresa {
     private String id;
     private String nombre;
     private String email;

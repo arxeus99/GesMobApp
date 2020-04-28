@@ -2,11 +2,20 @@ package com.valentelmadafaka.gesmobapp.model;
 
 import java.util.List;
 
-class Alumno extends Persona {
+public class Alumno extends Persona {
     private Empresa empresa;
     private List<Tarea> tareas;
     private List<Mensaje> mensajes;
     private String direccion;
+    private Profesor profesor;
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
 
     public Empresa getEmpresa() {
         return empresa;
