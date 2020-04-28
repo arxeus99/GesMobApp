@@ -1,4 +1,4 @@
-package com.valentelmadafaka.gesmobapp.bd;
+package com.valentelmadafaka.gesmobapp.utils.bd;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -131,9 +131,9 @@ public class GesMobDB {
         contentValues.put(ALUMNO_ID, alumno.getId());
         contentValues.put(ALUMNO_NOMBRE, alumno.getNombre());
         contentValues.put(ALUMNO_EMAIL, alumno.getEmail());
-        contentValues.put(ALUMNO_ID_EMPRESA, alumno.getEmpresa().getId());
+        contentValues.put(ALUMNO_ID_EMPRESA, alumno.getIdEmpresa());
         contentValues.put(ALUMNO_DIRECCION, alumno.getDireccion());
-        contentValues.put(ALUMNO_ID_PROFESOR, alumno.getProfesor().getId());
+        contentValues.put(ALUMNO_ID_PROFESOR, alumno.getIdProfesor());
         return bd.insert(TAB_ALUMNO, null, contentValues);
     }
 

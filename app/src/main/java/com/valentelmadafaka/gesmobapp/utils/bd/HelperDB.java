@@ -1,4 +1,4 @@
-package com.valentelmadafaka.gesmobapp.bd;
+package com.valentelmadafaka.gesmobapp.utils.bd;
 
 import android.content.Context;
 import android.database.SQLException;
@@ -6,20 +6,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.CREATE_TABLE_ALUMNO;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.CREATE_TABLE_EMPRESA;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.CREATE_TABLE_MENSAJE;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.CREATE_TABLE_OBSERVACION;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.CREATE_TABLE_PROFESOR;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.CREATE_TABLE_TAREA;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.NOMBRE_DB;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.TAB_ALUMNO;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.TAB_EMPRESA;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.TAB_MENSAJE;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.TAB_OBSERVACION;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.TAB_PROFESOR;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.TAB_TAREA;
-import static com.valentelmadafaka.gesmobapp.bd.GesMobDB.VERSION_DB;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_ALUMNO;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_EMPRESA;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_MENSAJE;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_OBSERVACION;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_PROFESOR;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_TAREA;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.NOMBRE_DB;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_ALUMNO;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_EMPRESA;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_MENSAJE;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_OBSERVACION;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_PROFESOR;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_TAREA;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.VERSION_DB;
 
 public class HelperDB extends SQLiteOpenHelper {
 
