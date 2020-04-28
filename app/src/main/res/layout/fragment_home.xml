@@ -36,24 +36,14 @@
             android:text="06/04-12/04"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-        <ScrollView
-            android:id="@+id/scroll"
+        <ListView
+            android:id="@+id/tareas"
             android:layout_width="match_parent"
-            android:layout_height="182dp"
-            android:layout_marginTop="100px">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ListView
-                    android:id="@+id/tareas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#A9000000" />
-            </LinearLayout>
-        </ScrollView>
+            android:layout_height="199dp"
+            android:layout_marginTop="50dp"
+            android:background="#00FFFFFF"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
 
         <Button
             android:id="@+id/crearTareaButton"

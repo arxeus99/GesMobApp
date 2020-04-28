@@ -15,7 +15,7 @@
         android:layout_marginRight="20dp"
         android:layout_weight="5"
         android:text="Hacer Java"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textStyle="bold" />
 
     <TextView
@@ -26,17 +26,20 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="20dp"
-        android:layout_toRightOf="@id/tituloTarea"
+        android:layout_toLeftOf="@id/hecho"
         android:layout_weight="4"
-        android:text="5h" />
+        android:text="5h"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <CheckBox
         android:id="@+id/hecho"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_toRightOf="@id/horasTarea"
         android:layout_weight="1" />
 </RelativeLayout>
