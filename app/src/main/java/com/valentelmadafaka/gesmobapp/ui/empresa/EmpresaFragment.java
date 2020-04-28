@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.valentelmadafaka.gesmobapp.R;
 
+
 public class EmpresaFragment extends Fragment {
 
     private EmpresaViewModel mViewModel;
@@ -29,6 +30,17 @@ public class EmpresaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.empresa_fragment, container, false);
+        mViewModel = ViewModelProviders.of(this).get(EmpresaViewModel.class);
+        TextView nombre = root.findViewById(R.id.nombreEmpresa);
+        TextView email = root.findViewById(R.id.correoEmpresa);
+        TextView web = root.findViewById(R.id.webEmpresa);
+        TextView telefono = root.findViewById(R.id.telefonoEmpresa);
+        TextView direccion = root.findViewById(R.id.direccionEmpresa);
+        nombre.setText(mViewModel.getNombreEmpresa());
+        email.setText(mViewModel.getCorreoEmpresa());
+        web.setText(mViewModel.getWebEmpresa());
+        telefono.setText(mViewModel.getTelefonoEmpresa());
+        direccion.setText(mViewModel.getDireccionEmpresa());
         return root;
     }
 

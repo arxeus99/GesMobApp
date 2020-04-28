@@ -13,6 +13,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.valentelmadafaka.gesmobapp.model.Alumno;
 import com.valentelmadafaka.gesmobapp.model.Empresa;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
+import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.ui.Mensajeria;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.json.JSONHelper;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        try {
+        try {
 //            Alumno alumno = JSONHelper.obtenerAlumno("{\n" +
 //                    "  \"id\": 1,\n" +
 //                    "  \"nombre\": \"Dickie\",\n" +
@@ -57,9 +58,50 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"nombre\": \"Tailor\",\n" +
 //                    "  \"email\": \"tjeune0@rediff.com\"\n" +
 //                    "}");
-//
-//            GesMobDB db = new GesMobDB(this);
-//            db.open();
+
+            Tarea t1 = JSONHelper.obtenerTarea("{\n" +
+                    "  \"id\": 1,\n" +
+                    "  \"nombre\": \"Holdlamis\",\n" +
+                    "  \"descripcion\": \"Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum.\",\n" +
+                    "  \"fecha\": \"9/29/2019\",\n" +
+                    "  \"horas\": 53,\n" +
+                    "  \"realizada\": 0,\n" +
+                    "  \"idAlumno\": 1,\n" +
+                    "  \"idProfesor\": 1\n" +
+                    "}");
+            Tarea t2 = JSONHelper.obtenerTarea("{\n" +
+                    "  \"id\": 2,\n" +
+                    "  \"nombre\": \"Opela\",\n" +
+                    "  \"descripcion\": \"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.\",\n" +
+                    "  \"fecha\": \"8/21/2019\",\n" +
+                    "  \"horas\": 27,\n" +
+                    "  \"realizada\": 1,\n" +
+                    "  \"idAlumno\": 1,\n" +
+                    "  \"idProfesor\": 1\n" +
+                    "}");
+            Tarea t3 = JSONHelper.obtenerTarea("{\n" +
+                    "  \"id\": 3,\n" +
+                    "  \"nombre\": \"Sub-Ex\",\n" +
+                    "  \"descripcion\": \"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl.\",\n" +
+                    "  \"fecha\": \"2/4/2020\",\n" +
+                    "  \"horas\": 65,\n" +
+                    "  \"realizada\": 1,\n" +
+                    "  \"idAlumno\": 1,\n" +
+                    "  \"idProfesor\": 1\n" +
+                    "}");
+            Tarea t4 = JSONHelper.obtenerTarea("{\n" +
+                    "  \"id\": 4,\n" +
+                    "  \"nombre\": \"Vagram\",\n" +
+                    "  \"descripcion\": \"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\",\n" +
+                    "  \"fecha\": \"5/28/2019\",\n" +
+                    "  \"horas\": 78,\n" +
+                    "  \"realizada\": 0,\n" +
+                    "  \"idAlumno\": 1,\n" +
+                    "  \"idProfesor\": 1\n" +
+                    "}");
+
+            GesMobDB db = new GesMobDB(this);
+            db.open();
 //            if(db.insertaEmpresa(empresa) == -1){
 //                Toast.makeText(this, "Error a l’afegir empresa",
 //                        Toast.LENGTH_SHORT).show();
@@ -72,10 +114,23 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(this, "Error a l’afegir professor",
 //                        Toast.LENGTH_SHORT).show();
 //            }
-//            db.close();
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+            if(db.insertaTarea(t1) == -1){
+                Toast.makeText(this, "Error a l’afegir t1",
+                        Toast.LENGTH_SHORT).show();
+            }if(db.insertaTarea(t2) == -1){
+                Toast.makeText(this, "Error a l’afegir t2",
+                        Toast.LENGTH_SHORT).show();
+            }if(db.insertaTarea(t3) == -1){
+                Toast.makeText(this, "Error a l’afegir t3",
+                        Toast.LENGTH_SHORT).show();
+            }if(db.insertaTarea(t4) == -1){
+                Toast.makeText(this, "Error a l’afegir t4",
+                        Toast.LENGTH_SHORT).show();
+            }
+            db.close();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);

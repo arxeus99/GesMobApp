@@ -174,8 +174,8 @@ public class GesMobDB {
         }else{
             contentValues.put(TAREA_REALIZADA, 0);
         }
-        contentValues.put(TAREA_ID_ALUMNO, tarea.getAlumno().getId());
-        contentValues.put(TAREA_ID_PROFESOR, tarea.getProfesor().getId());
+        contentValues.put(TAREA_ID_ALUMNO, tarea.getIdAlumno());
+        contentValues.put(TAREA_ID_PROFESOR, tarea.getIdProfesor());
         return bd.insert(TAB_TAREA, null, contentValues);
     }
 

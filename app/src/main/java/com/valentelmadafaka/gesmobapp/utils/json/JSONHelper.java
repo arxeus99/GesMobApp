@@ -6,6 +6,7 @@ import android.database.Cursor;
 import com.valentelmadafaka.gesmobapp.model.Alumno;
 import com.valentelmadafaka.gesmobapp.model.Empresa;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
+import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 
 import org.json.JSONException;
@@ -52,5 +53,23 @@ public abstract class JSONHelper {
         empresa.setWeb(data.getString("web"));
         empresa.setTelefono(data.getString("telefono"));
         return empresa;
+    }
+
+    public static Tarea obtenerTarea(String JSON) throws JSONException {
+        JSONObject data = new JSONObject(JSON);
+        Tarea tarea = new Tarea();
+        tarea.setId(data.getString("id"));
+        tarea.setNombre(data.getString("nombre"));
+        tarea.setDescripcion(data.getString("descripcion"));
+        tarea.setFecha(data.getString("fecha"));
+        tarea.setHoras(data.getInt("horas"));
+        if(data.getInt("realizada") == 1){
+            tarea.setRealizada(true);
+        }else{
+            tarea.setRealizada(false);
+        }
+        tarea.setIdAlumno(data.getString("idAlumno"));
+        tarea.setIdProfesor(data.getString("idProfesor"));
+        return tarea;
     }
 }

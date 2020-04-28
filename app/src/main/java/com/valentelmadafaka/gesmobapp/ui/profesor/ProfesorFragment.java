@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.valentelmadafaka.gesmobapp.R;
 
@@ -25,7 +26,13 @@ public class ProfesorFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profesor, container, false);
+        View root = inflater.inflate(R.layout.fragment_profesor, container, false);
+        mViewModel = ViewModelProviders.of(this).get(ProfesorViewModel.class);
+        TextView nombre = root.findViewById(R.id.nombreProfesor);
+        TextView email = root.findViewById(R.id.correoProfesor);
+        nombre.setText(mViewModel.getNombreProfesor());
+        email.setText(mViewModel.getCorreoProfesor());
+        return root;
     }
 
     @Override

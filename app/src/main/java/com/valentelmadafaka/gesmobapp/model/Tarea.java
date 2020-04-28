@@ -11,23 +11,23 @@ public class Tarea {
     private int horas;
     private boolean realizada;
     private List<Observacion> observaciones;
-    private Alumno alumno;
-    private Profesor profesor;
+    private String idAlumno;
+    private String idProfesor;
 
-    public Alumno getAlumno() {
-        return alumno;
+    public String getIdAlumno() {
+        return idAlumno;
     }
 
-    public void setAlumno(Alumno alumno) {
-        this.alumno = alumno;
+    public void setIdAlumno(String idAlumno) {
+        this.idAlumno = idAlumno;
     }
 
-    public Profesor getProfesor() {
-        return profesor;
+    public String getIdProfesor() {
+        return idProfesor;
     }
 
-    public void setProfesor(Profesor profesor) {
-        this.profesor = profesor;
+    public void setIdProfesor(String idProfesor) {
+        this.idProfesor = idProfesor;
     }
 
     public String getId() {
