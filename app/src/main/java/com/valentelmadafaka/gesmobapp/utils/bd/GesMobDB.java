@@ -216,6 +216,11 @@ public class GesMobDB {
         return bd.insert(TAB_OBSERVACION, null, contentValues);
     }
 
+    public int obtenerNumeroTareas(){
+        Cursor c = bd.rawQuery("SELECT count(*) FROM " + TAB_TAREA, null);
+        c.moveToFirst();
+        return c.getInt(0);
+    }
 
 
 
