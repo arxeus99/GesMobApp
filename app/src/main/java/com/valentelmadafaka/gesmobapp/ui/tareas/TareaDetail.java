@@ -120,5 +120,12 @@ public class TareaDetail extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void finalizarVoid(View view){
+        tarea.setRealizada(true);
+        db.open();
+        db.finalizarTarea(Integer.parseInt(tarea.getId()));
+        db.close();
+    }
+
 
 }

@@ -55,16 +55,31 @@
                 android:layout_height="117dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:background="#00FFFFFF" />
+                android:background="#00FFFFFF" >
 
-            <Button
-                android:id="@+id/añadirObservacion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="Añadir observacion" />
+            </ListView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/añadirObservacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Añadir observacion" />
+
+                <Button
+                    android:id="@+id/finalizada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="marcar como finalizada"
+                    android:onClick="finalizarVoid"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

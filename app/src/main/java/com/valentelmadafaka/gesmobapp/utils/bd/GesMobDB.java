@@ -233,6 +233,10 @@ public class GesMobDB {
         return cursor;
     }
 
+    public void finalizarTarea(long id){
+        bd.execSQL("UPDATE "+TAB_TAREA+" SET "+TAREA_REALIZADA+" = 1 WHERE "+TAREA_ID+" = "+id);
+    }
+
 
 
 
