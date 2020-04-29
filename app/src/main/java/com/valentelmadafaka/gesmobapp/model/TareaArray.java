@@ -27,7 +27,7 @@ public class TareaArray extends ArrayAdapter<Tarea> {
 
     public View getView(int position, View convertView, ViewGroup parent){
         Tarea tarea = tareaArrayList.get(position);
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.tarea_view, null);
         TextView titulo = view.findViewById(R.id.tituloTarea);
         TextView horas = view.findViewById(R.id.horasTarea);

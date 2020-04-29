@@ -2,16 +2,20 @@ package com.valentelmadafaka.gesmobapp.model;
 
 public class Observacion {
     private String id;
-    private Persona autor;
+    private String autorId;
     private String contenido;
-    private Tarea tarea;
+    private String tareaId;
 
-    public Tarea getTarea() {
-        return tarea;
+    public void setAutorId(String autorId) {
+        this.autorId = autorId;
     }
 
-    public void setTarea(Tarea tarea) {
-        this.tarea = tarea;
+    public String getTareaId() {
+        return tareaId;
+    }
+
+    public void setTareaId(String tareaId) {
+        this.tareaId = tareaId;
     }
 
     public String getId() {
@@ -22,12 +26,8 @@ public class Observacion {
         this.id = id;
     }
 
-    public Persona getAutor() {
-        return autor;
-    }
-
-    public void setAutor(Persona autor) {
-        this.autor = autor;
+    public String getAutorId() {
+        return autorId;
     }
 
     public String getContenido() {

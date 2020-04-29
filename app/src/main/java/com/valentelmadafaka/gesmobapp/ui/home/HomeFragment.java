@@ -6,20 +6,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.valentelmadafaka.gesmobapp.R;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.TareaArray;
-import com.valentelmadafaka.gesmobapp.ui.TareaForm;
+import com.valentelmadafaka.gesmobapp.ui.tareas.TareaDetail;
+import com.valentelmadafaka.gesmobapp.ui.tareas.TareaForm;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -70,6 +71,17 @@ public class HomeFragment extends Fragment {
         TareaArray tareaArray = new TareaArray(getActivity(), R.layout.tarea_view, tareas);
         ListView listView = root.findViewById(R.id.tareas);
         listView.setAdapter(tareaArray);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Tarea tarea = (Tarea)parent.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity(), TareaDetail.class);
+                intent.putExtra("tarea", tarea);
+                startActivity(intent);
+            }
+        });
+
         return root;
     }
 }

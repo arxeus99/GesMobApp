@@ -41,7 +41,7 @@
                 android:src="@drawable/arroba" />
 
             <TextView
-                android:id="@+id/correoEmpresa"
+                android:id="@+id/duracionTarea"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"

@@ -1,8 +1,9 @@
 package com.valentelmadafaka.gesmobapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Tarea {
+public class Tarea implements Serializable {
 
     private String id;
     private String nombre;

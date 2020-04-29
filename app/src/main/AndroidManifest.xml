@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.TareaForm"
-            android:label="Crear nueva tarea"></activity>
+        <activity android:name=".ui.tareas.TareaDetail"></activity>
+        <activity
+            android:name=".ui.tareas.TareaForm"
+            android:label="Crear nueva tarea" />
         <activity
             android:name=".ui.Mensajeria"
-            android:label="Chat"
-            android:parentActivityName=".MainActivity" />
+            android:label="Chat" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

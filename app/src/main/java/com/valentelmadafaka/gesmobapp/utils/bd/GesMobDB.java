@@ -210,8 +210,8 @@ public class GesMobDB {
     public long insertaObservacion(Observacion observacion){
         ContentValues contentValues = new ContentValues();
         contentValues.put(OBSERVACION_ID, observacion.getId());
-        contentValues.put(OBSERVACION_ID_EMISOR, observacion.getAutor().getId());
-        contentValues.put(OBSERVACION_ID_TAREA, observacion.getTarea().getId());
+        contentValues.put(OBSERVACION_ID_EMISOR, observacion.getAutorId());
+        contentValues.put(OBSERVACION_ID_TAREA, observacion.getTareaId());
         contentValues.put(OBSERVACION_CONTENIDO, observacion.getContenido());
         return bd.insert(TAB_OBSERVACION, null, contentValues);
     }
@@ -220,6 +220,17 @@ public class GesMobDB {
         Cursor c = bd.rawQuery("SELECT count(*) FROM " + TAB_TAREA, null);
         c.moveToFirst();
         return c.getInt(0);
+    }
+
+    public int obetenerNumeroObservaciones(){
+        Cursor c = bd.rawQuery("SELECT count(*) FROM " + TAB_OBSERVACION, null);
+        c.moveToFirst();
+        return c.getInt(0);
+    }
+
+    public Cursor obetenerObservacionesDeTareas(long id){
+        Cursor cursor = bd.query(true, TAB_OBSERVACION, new String[]{OBSERVACION_ID, OBSERVACION_ID_EMISOR, OBSERVACION_ID_TAREA, OBSERVACION_CONTENIDO}, OBSERVACION_ID_TAREA + " = " + id, null, null, null, null, null);
+        return cursor;
     }
 
 

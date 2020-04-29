@@ -1,4 +1,4 @@
-package com.valentelmadafaka.gesmobapp.ui;
+package com.valentelmadafaka.gesmobapp.ui.tareas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

@@ -39,11 +39,9 @@
         <ListView
             android:id="@+id/tareas"
             android:layout_width="match_parent"
-            android:layout_height="199dp"
-            android:layout_marginTop="50dp"
-            android:background="#00FFFFFF"
-            android:divider="@null"
-            android:dividerHeight="0dp" />
+            android:layout_height="235dp"
+            android:clickable="false"
+            android:focusable="false"/>
 
         <Button
             android:id="@+id/crearTareaButton"

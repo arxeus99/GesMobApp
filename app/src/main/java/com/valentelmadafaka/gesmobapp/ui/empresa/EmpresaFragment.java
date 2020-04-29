@@ -2,8 +2,6 @@ package com.valentelmadafaka.gesmobapp.ui.empresa;
 
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,7 +30,7 @@ public class EmpresaFragment extends Fragment {
         View root = inflater.inflate(R.layout.empresa_fragment, container, false);
         mViewModel = ViewModelProviders.of(this).get(EmpresaViewModel.class);
         TextView nombre = root.findViewById(R.id.nombreEmpresa);
-        TextView email = root.findViewById(R.id.correoEmpresa);
+        TextView email = root.findViewById(R.id.duracionTarea);
         TextView web = root.findViewById(R.id.webEmpresa);
         TextView telefono = root.findViewById(R.id.telefonoEmpresa);
         TextView direccion = root.findViewById(R.id.direccionEmpresa);

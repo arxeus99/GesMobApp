@@ -37,27 +37,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        try {
-////            Alumno alumno = JSONHelper.obtenerAlumno("{\n" +
-////                    "  \"id\": 1,\n" +
-////                    "  \"nombre\": \"Dickie\",\n" +
-////                    "  \"email\": \"dbartosinski0@mac.com\",\n" +
-////                    "  \"direccion\": \"12025 Stoughton Hill\",\n" +
-////                    "  \"idProfesor\": 1,\n" +
-////                    "  \"idEmpresa\": 1\n" +
-////                    "}");
-////            Empresa empresa = JSONHelper.obtenerEmpresa("{\n" +
-////                    "  \"id\": 1,\n" +
-////                    "  \"nombre\": \"Shields, Wisozk and Doyle\",\n" +
-////                    "  \"email\": \"ggott0@washington.edu\",\n" +
-////                    "  \"direccion\": \"06981 Michigan Park\",\n" +
-////                    "  \"web\": \"Kurdish.com\",\n" +
-////                    "  \"telefono\": \"686-901-2503\"\n" +
-////                    "}");
-////            Profesor profesor = JSONHelper.obtenerProfesor("{\n" +
-////                    "  \"id\": 1,\n" +
-////                    "  \"nombre\": \"Tailor\",\n" +
-////                    "  \"email\": \"tjeune0@rediff.com\"\n" +
-////                    "}");
+//            Alumno alumno = JSONHelper.obtenerAlumno("{\n" +
+//                    "  \"id\": 1,\n" +
+//                    "  \"nombre\": \"Dickie\",\n" +
+//                    "  \"email\": \"dbartosinski0@mac.com\",\n" +
+//                    "  \"direccion\": \"12025 Stoughton Hill\",\n" +
+//                    "  \"idProfesor\": 1,\n" +
+//                    "  \"idEmpresa\": 1\n" +
+//                    "}");
+//            Empresa empresa = JSONHelper.obtenerEmpresa("{\n" +
+//                    "  \"id\": 1,\n" +
+//                    "  \"nombre\": \"Shields, Wisozk and Doyle\",\n" +
+//                    "  \"email\": \"ggott0@washington.edu\",\n" +
+//                    "  \"direccion\": \"06981 Michigan Park\",\n" +
+//                    "  \"web\": \"Kurdish.com\",\n" +
+//                    "  \"telefono\": \"686-901-2503\"\n" +
+//                    "}");
+//            Profesor profesor = JSONHelper.obtenerProfesor("{\n" +
+//                    "  \"id\": 1,\n" +
+//                    "  \"nombre\": \"Tailor\",\n" +
+//                    "  \"email\": \"tjeune0@rediff.com\"\n" +
+//                    "}");
 //
 //            Tarea t1 = JSONHelper.obtenerTarea("{\n" +
 //                    "  \"id\": 1,\n" +
@@ -102,32 +102,32 @@ public class MainActivity extends AppCompatActivity {
 //
 //            GesMobDB db = new GesMobDB(this);
 //            db.open();
-////            if(db.insertaEmpresa(empresa) == -1){
-////                Toast.makeText(this, "Error a l’afegir empresa",
-////                        Toast.LENGTH_SHORT).show();
-////            }
-////            if(db.insertaAlumno(alumno) == -1 ){
-////                Toast.makeText(this, "Error a l’afegir alumne",
-////                        Toast.LENGTH_SHORT).show();
-////            }
-////            if(db.insertaProfesor(profesor) == -1){
-////                Toast.makeText(this, "Error a l’afegir professor",
-////                        Toast.LENGTH_SHORT).show();
-////            }
-////            if(db.insertaTarea(t1) == -1){
-////                Toast.makeText(this, "Error a l’afegir t1",
-////                        Toast.LENGTH_SHORT).show();
-////            }if(db.insertaTarea(t2) == -1){
-////                Toast.makeText(this, "Error a l’afegir t2",
-////                        Toast.LENGTH_SHORT).show();
-////            }if(db.insertaTarea(t3) == -1){
-////                Toast.makeText(this, "Error a l’afegir t3",
-////                        Toast.LENGTH_SHORT).show();
-////            }if(db.insertaTarea(t4) == -1){
-////                Toast.makeText(this, "Error a l’afegir t4",
-////                        Toast.LENGTH_SHORT).show();
-////            }
-////            db.close();
+//            if(db.insertaEmpresa(empresa) == -1){
+//                Toast.makeText(this, "Error a l’afegir empresa",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//            if(db.insertaAlumno(alumno) == -1 ){
+//                Toast.makeText(this, "Error a l’afegir alumne",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//            if(db.insertaProfesor(profesor) == -1){
+//                Toast.makeText(this, "Error a l’afegir professor",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//            if(db.insertaTarea(t1) == -1){
+//                Toast.makeText(this, "Error a l’afegir t1",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaTarea(t2) == -1){
+//                Toast.makeText(this, "Error a l’afegir t2",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaTarea(t3) == -1){
+//                Toast.makeText(this, "Error a l’afegir t3",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaTarea(t4) == -1){
+//                Toast.makeText(this, "Error a l’afegir t4",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//            db.close();
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
