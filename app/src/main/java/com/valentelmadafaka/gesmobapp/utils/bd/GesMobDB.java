@@ -130,6 +130,11 @@ public class GesMobDB {
         return cursor;
     }
 
+    public Cursor obtenerProfesor(String nombre){
+        Cursor cursor = bd.query(true, TAB_PROFESOR, new String[] {PROFESOR_ID, PROFESOR_NOMBRE, PROFESOR_EMAIL}, PROFESOR_NOMBRE + " LIKE '" + nombre+ "%'", null, null, null, null, null);
+        return cursor;
+    }
+
     public long insertaAlumno(Alumno alumno){
         ContentValues contentValues = new ContentValues();
         contentValues.put(ALUMNO_ID, alumno.getId());
@@ -143,6 +148,11 @@ public class GesMobDB {
 
     public Cursor obtenerAlumno(long id){
         Cursor cursor = bd.query(true, TAB_ALUMNO, new String[]{ALUMNO_ID, ALUMNO_NOMBRE, ALUMNO_EMAIL, ALUMNO_ID_EMPRESA, ALUMNO_DIRECCION, ALUMNO_ID_PROFESOR}, ALUMNO_ID + " = " + id, null, null, null, null, null);
+        return cursor;
+    }
+
+    public Cursor obtenerAlumno(String nombre){
+        Cursor cursor = bd.query(true, TAB_ALUMNO, new String[]{ALUMNO_ID, ALUMNO_NOMBRE, ALUMNO_EMAIL, ALUMNO_ID_EMPRESA, ALUMNO_DIRECCION, ALUMNO_ID_PROFESOR}, ALUMNO_NOMBRE + " LIKE '" + nombre + "%'", null, null, null, null, null);
         return cursor;
     }
 

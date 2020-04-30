@@ -17,6 +17,7 @@ import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.ui.Mensajeria;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.json.JSONHelper;
+import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
 import androidx.annotation.RequiresApi;
 import androidx.navigation.NavController;
@@ -134,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        if(PreferencesHelper.recuperarUsuari("User", this) == null){
+            startActivity(new Intent(this, LoginActivity.class));
+        }
         setSupportActionBar(toolbar);
         final FloatingActionButton fab = findViewById(R.id.nav_mensajeria);
         fab.setOnClickListener(new View.OnClickListener() {
