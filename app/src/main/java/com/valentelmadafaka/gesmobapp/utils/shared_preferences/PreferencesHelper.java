@@ -36,4 +36,11 @@ public class PreferencesHelper {
         }
         return object;
     }
+
+    public static void borrarUsuario(Context context){
+        SharedPreferences prefs = context.getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.apply();
+    }
 }

@@ -2,17 +2,22 @@ package com.valentelmadafaka.gesmobapp.ui.ajustes;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.valentelmadafaka.gesmobapp.LoginActivity;
 import com.valentelmadafaka.gesmobapp.R;
+import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
 public class AjustesFragment extends Fragment {
 
@@ -25,7 +30,16 @@ public class AjustesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.ajustes_fragment, container, false);
+        View root = inflater.inflate(R.layout.ajustes_fragment, container, false);
+        Button borrar = root.findViewById(R.id.borrarUser);
+        borrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferencesHelper.borrarUsuario(getActivity());
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
+        return root;
     }
 
     @Override
