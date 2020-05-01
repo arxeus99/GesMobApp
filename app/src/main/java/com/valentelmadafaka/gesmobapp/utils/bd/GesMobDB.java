@@ -254,5 +254,10 @@ public class GesMobDB {
         return c.getInt(0);
     }
 
+    public Cursor obtenerMensajes(){
+        Cursor c = bd.query(true, TAB_MENSAJE, new String[]{MENSAJE_ID, MENSAJE_CONTENIDO, MENSAJE_ID_EMISOR, MENSAJE_ID_RECEPTOR, MENSAJE_LEIDO}, null, null, null, null, null, null);
+        return c;
+    }
+
 
 }

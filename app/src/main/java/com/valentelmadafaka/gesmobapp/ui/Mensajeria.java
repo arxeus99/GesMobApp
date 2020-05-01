@@ -4,21 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.valentelmadafaka.gesmobapp.R;
 import com.valentelmadafaka.gesmobapp.model.Mensaje;
+import com.valentelmadafaka.gesmobapp.model.MensajeArray;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
+
+import java.util.ArrayList;
 
 public class Mensajeria extends AppCompatActivity {
 
     GesMobDB bd;
     EditText mensajeText;
+    ArrayList<Mensaje> mensajes = new ArrayList<>();
+    MensajeArray mensajeArray;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +34,31 @@ public class Mensajeria extends AppCompatActivity {
         setContentView(R.layout.activity_mensajeria);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mensajeText = findViewById(R.id.mensaje);
+
+        bd = new GesMobDB(this);
+        bd.open();
+        Cursor c = bd.obtenerMensajes();
+        c.moveToFirst();
+        while(!c.isAfterLast()){
+            Mensaje mensaje = new Mensaje();
+            mensaje.setId(c.getString(0));
+            mensaje.setContenido(c.getString(1));
+            mensaje.setIdEmisor(c.getString(2));
+            mensaje.setIdReceptor(c.getString(3));
+            if(c.getInt(4) == 1){
+                mensaje.setLeido(true);
+            }else{
+                mensaje.setLeido(false);
+            }
+            mensajes.add(mensaje);
+            c.moveToNext();
+        }
+        bd.close();
+
+        mensajeArray = new MensajeArray(this, R.layout.mensaje_enviado, mensajes);
+        listView = findViewById(R.id.messages_view);
+        listView.setAdapter(mensajeArray);
+
     }
 
     @Override
@@ -45,7 +78,12 @@ public class Mensajeria extends AppCompatActivity {
         mensaje.setIdReceptor(PreferencesHelper.recuperarUsuari("User", this).getIdProfesor());
         mensaje.setContenido(mensajeText.getText().toString());
         mensaje.setLeido(false);
-        Toast.makeText(this, mensaje.getContenido(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, mensaje.getContenido(), Toast.LENGTH_SHORT).show();
+        bd.insertaMensaje(mensaje);
+        bd.close();
         mensajeText.setText("");
+        mensajes.add(mensaje);
+        mensajeArray.notifyDataSetChanged();
+
     }
 }
