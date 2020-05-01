@@ -3,9 +3,9 @@ package com.valentelmadafaka.gesmobapp.model;
 public class Mensaje {
     private String id;
     private String contenido;
-    private Persona emisor;
-    private Persona receptor;
     private boolean leido;
+    private String idEmisor;
+    private String idReceptor;
 
     public boolean isLeido() {
         return leido;
@@ -31,19 +31,19 @@ public class Mensaje {
         this.contenido = contenido;
     }
 
-    public Persona getEmisor() {
-        return emisor;
+    public String getIdEmisor() {
+        return idEmisor;
     }
 
-    public void setEmisor(Persona emisor) {
-        this.emisor = emisor;
+    public void setIdEmisor(String idEmisor) {
+        this.idEmisor = idEmisor;
     }
 
-    public Persona getReceptor() {
-        return receptor;
+    public String getIdReceptor() {
+        return idReceptor;
     }
 
-    public void setReceptor(Persona receptor) {
-        this.receptor = receptor;
+    public void setIdReceptor(String idReceptor) {
+        this.idReceptor = idReceptor;
     }
 }

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.valentelmadafaka.gesmobapp.LoginActivity;
 import com.valentelmadafaka.gesmobapp.R;
@@ -31,6 +32,7 @@ public class AjustesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.ajustes_fragment, container, false);
+        mViewModel = ViewModelProviders.of(this).get(AjustesViewModel.class);
         Button borrar = root.findViewById(R.id.borrarUser);
         borrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +41,8 @@ public class AjustesFragment extends Fragment {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
+        TextView nombre = root.findViewById(R.id.nombreUsuario);
+        nombre.setText("Hola "+mViewModel.getUserName());
         return root;
     }
 

@@ -16,4 +16,8 @@ public class AjustesViewModel extends AndroidViewModel {
     }
 
     Alumno alumno = PreferencesHelper.recuperarUsuari("User", getApplication().getApplicationContext());
+
+    public String getUserName(){
+        return alumno.getNombre();
+    }
 }

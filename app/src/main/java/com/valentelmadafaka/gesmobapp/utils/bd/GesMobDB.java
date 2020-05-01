@@ -203,7 +203,8 @@ public class GesMobDB {
         ContentValues contentValues = new ContentValues();
         contentValues.put(MENSAJE_ID, mensaje.getId());
         contentValues.put(MENSAJE_CONTENIDO, mensaje.getContenido());
-        contentValues.put(MENSAJE_ID_EMISOR, mensaje.getEmisor().getId());
+        contentValues.put(MENSAJE_ID_EMISOR, mensaje.getIdEmisor());
+        contentValues.put(MENSAJE_ID_RECEPTOR, mensaje.getIdReceptor());
         if(mensaje.isLeido()){
             contentValues.put(MENSAJE_LEIDO, 1);
         }else{
@@ -247,7 +248,11 @@ public class GesMobDB {
         bd.execSQL("UPDATE "+TAB_TAREA+" SET "+TAREA_REALIZADA+" = 1 WHERE "+TAREA_ID+" = "+id);
     }
 
-
+    public int obtenerNumeroMensajes(){
+        Cursor c = bd.rawQuery("SELECT count(*) FROM " + TAB_MENSAJE, null);
+        c.moveToFirst();
+        return c.getInt(0);
+    }
 
 
 }
