@@ -1,9 +1,10 @@
 package com.valentelmadafaka.gesmobapp.model;
 
-public abstract class Persona {
+public class Usuario {
     private String id;
     private String nombre;
     private String email;
+    private String tipo;
 
     public String getId() {
         return id;
@@ -27,5 +28,13 @@ public abstract class Persona {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

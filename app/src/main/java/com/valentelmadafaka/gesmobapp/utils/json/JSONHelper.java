@@ -7,6 +7,7 @@ import com.valentelmadafaka.gesmobapp.model.Alumno;
 import com.valentelmadafaka.gesmobapp.model.Empresa;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 
 import org.json.JSONException;
@@ -22,25 +23,24 @@ public abstract class JSONHelper {
 //        this.db = new GesMobDB(context);
 //    }
 
+    public static Usuario obtenerUsuario(String JSON) throws JSONException{
+        JSONObject data = new JSONObject(JSON);
+        Usuario usuario = new Usuario();
+        usuario.setId(data.getString("id"));
+        usuario.setNombre(data.getString("nombre"));
+        usuario.setEmail(data.getString("email"));
+        usuario.setTipo(data.getString("tipo"));
+        return usuario;
+    }
+
     public static Alumno obtenerAlumno(String JSON) throws JSONException {
         JSONObject data = new JSONObject(JSON);
         Alumno alumno = new Alumno();
         alumno.setId(data.getString("id"));
-        alumno.setNombre(data.getString("nombre"));
-        alumno.setEmail(data.getString("email"));
         alumno.setDireccion(data.getString("direccion"));
         alumno.setIdProfesor(data.getString("idProfesor"));
         alumno.setIdEmpresa(data.getString("idEmpresa"));
         return alumno;
-    }
-
-    public static Profesor obtenerProfesor(String JSON) throws JSONException {
-        JSONObject data = new JSONObject(JSON);
-        Profesor profesor = new Profesor();
-        profesor.setId(data.getString("id"));
-        profesor.setNombre(data.getString("nombre"));
-        profesor.setEmail(data.getString("email"));
-        return profesor;
     }
 
     public static Empresa obtenerEmpresa(String JSON) throws JSONException{

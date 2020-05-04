@@ -14,6 +14,7 @@ import com.valentelmadafaka.gesmobapp.model.Alumno;
 import com.valentelmadafaka.gesmobapp.model.Empresa;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.ui.Mensajeria;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.json.JSONHelper;
@@ -38,12 +39,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        try {
+//            Usuario ususario = JSONHelper.obtenerUsuario("{\"id\":1,\"nombre\":\"Yoshi\",\"email\":\"ydensham0@artisteer.com\",\"tipo\":\"alumno\"}");
 //            Alumno alumno = JSONHelper.obtenerAlumno("{\n" +
 //                    "  \"id\": 1,\n" +
-//                    "  \"nombre\": \"Dickie\",\n" +
-//                    "  \"email\": \"dbartosinski0@mac.com\",\n" +
 //                    "  \"direccion\": \"12025 Stoughton Hill\",\n" +
-//                    "  \"idProfesor\": 1,\n" +
+//                    "  \"idProfesor\": 2,\n" +
 //                    "  \"idEmpresa\": 1\n" +
 //                    "}");
 //            Empresa empresa = JSONHelper.obtenerEmpresa("{\n" +
@@ -54,11 +54,7 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"web\": \"Kurdish.com\",\n" +
 //                    "  \"telefono\": \"686-901-2503\"\n" +
 //                    "}");
-//            Profesor profesor = JSONHelper.obtenerProfesor("{\n" +
-//                    "  \"id\": 1,\n" +
-//                    "  \"nombre\": \"Tailor\",\n" +
-//                    "  \"email\": \"tjeune0@rediff.com\"\n" +
-//                    "}");
+//            Usuario profesor = JSONHelper.obtenerUsuario("{\"id\":2,\"nombre\":\"Benedict\",\"email\":\"bspeek1@odnoklassniki.ru\",\"tipo\":\"profesor\"}");
 //
 //            Tarea t1 = JSONHelper.obtenerTarea("{\n" +
 //                    "  \"id\": 1,\n" +
@@ -68,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"horas\": 53,\n" +
 //                    "  \"realizada\": 0,\n" +
 //                    "  \"idAlumno\": 1,\n" +
-//                    "  \"idProfesor\": 1\n" +
+//                    "  \"idProfesor\": 2\n" +
 //                    "}");
 //            Tarea t2 = JSONHelper.obtenerTarea("{\n" +
 //                    "  \"id\": 2,\n" +
@@ -78,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"horas\": 27,\n" +
 //                    "  \"realizada\": 1,\n" +
 //                    "  \"idAlumno\": 1,\n" +
-//                    "  \"idProfesor\": 1\n" +
+//                    "  \"idProfesor\": 2\n" +
 //                    "}");
 //            Tarea t3 = JSONHelper.obtenerTarea("{\n" +
 //                    "  \"id\": 3,\n" +
@@ -88,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"horas\": 65,\n" +
 //                    "  \"realizada\": 1,\n" +
 //                    "  \"idAlumno\": 1,\n" +
-//                    "  \"idProfesor\": 1\n" +
+//                    "  \"idProfesor\": 2\n" +
 //                    "}");
 //            Tarea t4 = JSONHelper.obtenerTarea("{\n" +
 //                    "  \"id\": 4,\n" +
@@ -98,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"horas\": 78,\n" +
 //                    "  \"realizada\": 0,\n" +
 //                    "  \"idAlumno\": 1,\n" +
-//                    "  \"idProfesor\": 1\n" +
+//                    "  \"idProfesor\": 2\n" +
 //                    "}");
 //
 //            GesMobDB db = new GesMobDB(this);
@@ -111,8 +107,11 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(this, "Error a l’afegir alumne",
 //                        Toast.LENGTH_SHORT).show();
 //            }
-//            if(db.insertaProfesor(profesor) == -1){
+//            if(db.insertaUsuario(profesor) == -1){
 //                Toast.makeText(this, "Error a l’afegir professor",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaUsuario(ususario) == -1){
+//                Toast.makeText(this, "Error a l’afegir usuari",
 //                        Toast.LENGTH_SHORT).show();
 //            }
 //            if(db.insertaTarea(t1) == -1){

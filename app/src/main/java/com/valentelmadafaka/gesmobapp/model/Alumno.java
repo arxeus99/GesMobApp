@@ -2,7 +2,7 @@ package com.valentelmadafaka.gesmobapp.model;
 
 import java.util.List;
 
-public class Alumno extends Persona {
+public class Alumno extends Usuario {
     private List<Tarea> tareas;
     private List<Mensaje> mensajes;
     private String direccion;

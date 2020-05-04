@@ -72,10 +72,11 @@ public class Mensajeria extends AppCompatActivity {
     public void enviarVoid(View view) {
         bd = new GesMobDB(this);
         bd.open();
+        Cursor c = bd.obtenerAlumno(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", this).getId()));
         Mensaje mensaje = new Mensaje();
         mensaje.setId(bd.obtenerNumeroMensajes()+"");
         mensaje.setIdEmisor(PreferencesHelper.recuperarUsuari("User", this).getId());
-        mensaje.setIdReceptor(PreferencesHelper.recuperarUsuari("User", this).getIdProfesor());
+        mensaje.setIdReceptor(c.getString(3));
         mensaje.setContenido(mensajeText.getText().toString());
         mensaje.setLeido(false);
         //Toast.makeText(this, mensaje.getContenido(), Toast.LENGTH_SHORT).show();

@@ -10,15 +10,15 @@ import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_ALUM
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_EMPRESA;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_MENSAJE;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_OBSERVACION;
-import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_PROFESOR;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_TAREA;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_USUARIO;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.NOMBRE_DB;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_ALUMNO;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_EMPRESA;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_MENSAJE;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_OBSERVACION;
-import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_PROFESOR;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_TAREA;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_USUARIO;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.VERSION_DB;
 
 public class HelperDB extends SQLiteOpenHelper {
@@ -28,7 +28,7 @@ public class HelperDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         try{
-            db.execSQL(CREATE_TABLE_PROFESOR);
+            db.execSQL(CREATE_TABLE_USUARIO);
             db.execSQL(CREATE_TABLE_ALUMNO);
             db.execSQL(CREATE_TABLE_EMPRESA);
             db.execSQL(CREATE_TABLE_TAREA);
@@ -44,7 +44,7 @@ public class HelperDB extends SQLiteOpenHelper {
         Log.w(GesMobDB.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + TAB_PROFESOR);
+        db.execSQL("DROP TABLE IF EXISTS " + TAB_USUARIO);
         db.execSQL("DROP TABLE IF EXISTS " + TAB_ALUMNO);
         db.execSQL("DROP TABLE IF EXISTS " + TAB_EMPRESA);
         db.execSQL("DROP TABLE IF EXISTS " + TAB_TAREA);

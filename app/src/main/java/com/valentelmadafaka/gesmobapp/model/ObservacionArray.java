@@ -35,15 +35,8 @@ public class ObservacionArray extends ArrayAdapter<Observacion> {
         TextView contenido = view.findViewById(R.id.contenido);
         gesMobDB = new GesMobDB(context);
         gesMobDB.open();
-        if(observacion.getAutorId().split(" ")[1].equals("P")){
-            Cursor cursor = gesMobDB.obtenerProfesor(Integer.parseInt(observacion.getAutorId().split(" ")[0]));
-            cursor.moveToFirst();
-            autor.setText(cursor.getString(1));
-        }else{
-            Cursor cursor = gesMobDB.obtenerAlumno(Integer.parseInt(observacion.getAutorId().split(" ")[0]));
-            cursor.moveToFirst();
-            autor.setText(cursor.getString(1));
-        }
+        Cursor cursor = gesMobDB.obtenerUsuario(Integer.parseInt(observacion.getAutorId()));
+        autor.setText(cursor.getString(1));
         contenido.setText(observacion.getContenido());
         gesMobDB.close();
         return view;

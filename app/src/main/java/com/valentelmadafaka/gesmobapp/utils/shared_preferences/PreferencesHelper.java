@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.valentelmadafaka.gesmobapp.model.Alumno;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
 
 import org.json.JSONObject;
 
@@ -23,14 +24,14 @@ public class PreferencesHelper {
         editor.apply();
     }
 
-    public static Alumno recuperarUsuari(String key, Context context){
+    public static Usuario recuperarUsuari(String key, Context context){
         SharedPreferences prefs = context.getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         String json = prefs.getString(key, "");
-        Alumno object;
+        Usuario object;
         if(json.isEmpty()){
             object = null;
         }else{
-            java.lang.reflect.Type type = new TypeToken<Alumno>(){}.getType();
+            java.lang.reflect.Type type = new TypeToken<Usuario>(){}.getType();
             Gson gson = new Gson();
             object = gson.fromJson(json, type);
         }

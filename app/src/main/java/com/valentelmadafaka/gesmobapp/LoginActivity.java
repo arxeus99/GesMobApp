@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.valentelmadafaka.gesmobapp.model.Alumno;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
@@ -33,35 +34,31 @@ public class LoginActivity extends AppCompatActivity {
         if(contraseña.getText().toString().equals("12345")){
             GesMobDB bd = new GesMobDB(this);
             bd.open();
-            Cursor c = bd.obtenerProfesor(usuario.getText().toString());
+            Cursor c = bd.obtenerUsuario(usuario.getText().toString());
             if(c.getCount() == 0){
-                c = bd.obtenerAlumno(usuario.getText().toString());
-                if(c.getCount() == 0){
-                    respuesta.setText("Usuario no encontrado");
-                }else{
-                    c.moveToFirst();
-                    Alumno alumno = new Alumno();
-                    alumno.setId(c.getString(0));
-                    alumno.setNombre(c.getString(1));
-                    alumno.setEmail(c.getString(2));
-                    alumno.setIdEmpresa(c.getString(3));
-                    alumno.setDireccion(c.getString(4));
-                    alumno.setIdProfesor(c.getString(5));
-                    PreferencesHelper.desaUsuari("User", alumno, this);
-                    startActivity(new Intent(this, MainActivity.class));
-                }
+                respuesta.setText("Usuario no encontrado");
             }else{
                 c.moveToFirst();
-                Profesor profesor = new Profesor();
-                profesor.setId(c.getString(0));
-                profesor.setNombre(c.getString(1));
-                profesor.setEmail(c.getString(2));
-                PreferencesHelper.desaUsuari("User", profesor, this);
-                startActivity(new Intent(this, MainActivity.class));
+                Usuario usuario = new Usuario();
+                usuario.setId(c.getString(0));
+                usuario.setNombre(c.getString(1));
+                usuario.setEmail(c.getString(2));
+                usuario.setTipo(c.getString(3));
+                if(usuario.getTipo().equals("profesor")){
+                    respuesta.setText("La aplicación de profesor está en proceso");
+                }else{
+                    PreferencesHelper.desaUsuari("User", usuario, this);
+                    startActivity(new Intent(this, MainActivity.class));
+                }
             }
             bd.close();
         }else{
             respuesta.setText("Contraseña incorrecta");
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        this.finishAffinity();
     }
 }

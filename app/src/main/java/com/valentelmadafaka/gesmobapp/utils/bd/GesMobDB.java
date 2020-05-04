@@ -12,11 +12,23 @@ import com.valentelmadafaka.gesmobapp.model.Mensaje;
 import com.valentelmadafaka.gesmobapp.model.Observacion;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
 
 public class GesMobDB {
 
     public static final int VERSION_DB = 11;
     public static final String NOMBRE_DB = "gesmob.db";
+    public static final String TAB_USUARIO = "usuario";
+    public static final String USUARIO_ID = "id";
+    public static final String USUARIO_NOMBRE = "nombre";
+    public static final String USUARIO_EMAIL = "email";
+    public static final String USUARIO_TIPO = "tipo";
+    public static final String CREATE_TABLE_USUARIO = "create table " + TAB_USUARIO +
+            "("
+            + USUARIO_ID + " integer primary key, "
+            + USUARIO_NOMBRE + " text not null, "
+            + USUARIO_EMAIL + " text not null, "
+            + USUARIO_TIPO + " text not null)";
     public static final String TAB_PROFESOR = "profesor";
     public static final String PROFESOR_ID = "id";
     public static final String PROFESOR_NOMBRE = "nombre";
@@ -28,16 +40,12 @@ public class GesMobDB {
             + PROFESOR_EMAIL + " text not null)";
     public static final String TAB_ALUMNO = "alumno";
     public static final String ALUMNO_ID = "id";
-    public static final String ALUMNO_NOMBRE = "nombre";
-    public static final String ALUMNO_EMAIL = "email";
     public static final String ALUMNO_ID_EMPRESA = "idEmpresa";
     public static final String ALUMNO_DIRECCION = "direccion";
     public static final String ALUMNO_ID_PROFESOR = "idProfesor";
     public static final String CREATE_TABLE_ALUMNO = "create table " + TAB_ALUMNO +
             "("
             + ALUMNO_ID + " integer primary key, "
-            + ALUMNO_NOMBRE + " text not null, "
-            + ALUMNO_EMAIL + " text not null, "
             + ALUMNO_ID_EMPRESA + " text not null, "
             + ALUMNO_DIRECCION + " text not null, "
             + ALUMNO_ID_PROFESOR + " text not null)";
@@ -117,29 +125,28 @@ public class GesMobDB {
 
     public SQLiteDatabase getBd(){ return this.bd; }
 
-    public long insertaProfesor(Profesor profesor){
+    public long insertaUsuario(Usuario usuario){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(PROFESOR_ID, profesor.getId());
-        contentValues.put(PROFESOR_NOMBRE, profesor.getNombre());
-        contentValues.put(PROFESOR_EMAIL, profesor.getEmail());
-        return bd.insert(TAB_PROFESOR, null, contentValues);
+        contentValues.put(USUARIO_ID, usuario.getId());
+        contentValues.put(USUARIO_NOMBRE, usuario.getNombre());
+        contentValues.put(USUARIO_EMAIL, usuario.getEmail());
+        contentValues.put(USUARIO_TIPO, usuario.getTipo());
+        return bd.insert(TAB_USUARIO, null, contentValues);
     }
 
-    public Cursor obtenerProfesor(long id){
-        Cursor cursor = bd.query(true, TAB_PROFESOR, new String[] {PROFESOR_ID, PROFESOR_NOMBRE, PROFESOR_EMAIL}, PROFESOR_ID + " = " + id, null, null, null, null, null);
+    public Cursor obtenerUsuario(long id){
+        Cursor cursor = bd.query(true, TAB_USUARIO, new String[]{USUARIO_ID, USUARIO_NOMBRE, USUARIO_EMAIL, USUARIO_TIPO}, USUARIO_ID + " = " + id, null, null, null, null, null);
         return cursor;
     }
 
-    public Cursor obtenerProfesor(String nombre){
-        Cursor cursor = bd.query(true, TAB_PROFESOR, new String[] {PROFESOR_ID, PROFESOR_NOMBRE, PROFESOR_EMAIL}, PROFESOR_NOMBRE + " LIKE '" + nombre+ "%'", null, null, null, null, null);
+    public Cursor obtenerUsuario(String nombre){
+        Cursor cursor = bd.query(true, TAB_USUARIO, new String[]{USUARIO_ID, USUARIO_NOMBRE, USUARIO_EMAIL, USUARIO_TIPO}, USUARIO_NOMBRE + " LIKE '" + nombre + "%'", null, null, null, null, null);
         return cursor;
     }
 
     public long insertaAlumno(Alumno alumno){
         ContentValues contentValues = new ContentValues();
         contentValues.put(ALUMNO_ID, alumno.getId());
-        contentValues.put(ALUMNO_NOMBRE, alumno.getNombre());
-        contentValues.put(ALUMNO_EMAIL, alumno.getEmail());
         contentValues.put(ALUMNO_ID_EMPRESA, alumno.getIdEmpresa());
         contentValues.put(ALUMNO_DIRECCION, alumno.getDireccion());
         contentValues.put(ALUMNO_ID_PROFESOR, alumno.getIdProfesor());
@@ -147,12 +154,7 @@ public class GesMobDB {
     }
 
     public Cursor obtenerAlumno(long id){
-        Cursor cursor = bd.query(true, TAB_ALUMNO, new String[]{ALUMNO_ID, ALUMNO_NOMBRE, ALUMNO_EMAIL, ALUMNO_ID_EMPRESA, ALUMNO_DIRECCION, ALUMNO_ID_PROFESOR}, ALUMNO_ID + " = " + id, null, null, null, null, null);
-        return cursor;
-    }
-
-    public Cursor obtenerAlumno(String nombre){
-        Cursor cursor = bd.query(true, TAB_ALUMNO, new String[]{ALUMNO_ID, ALUMNO_NOMBRE, ALUMNO_EMAIL, ALUMNO_ID_EMPRESA, ALUMNO_DIRECCION, ALUMNO_ID_PROFESOR}, ALUMNO_NOMBRE + " LIKE '" + nombre + "%'", null, null, null, null, null);
+        Cursor cursor = bd.query(true, TAB_ALUMNO, new String[]{ALUMNO_ID, ALUMNO_ID_EMPRESA, ALUMNO_DIRECCION, ALUMNO_ID_PROFESOR}, ALUMNO_ID + " = " + id, null, null, null, null, null);
         return cursor;
     }
 

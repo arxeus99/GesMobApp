@@ -8,14 +8,14 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModel;
 
 import com.valentelmadafaka.gesmobapp.model.Alumno;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
 public class EmpresaViewModel extends AndroidViewModel {
 
     GesMobDB db = new GesMobDB(getApplication().getApplicationContext());
-    Alumno alumno = PreferencesHelper.recuperarUsuari("User", getApplication().getApplicationContext());
-    int empresa = Integer.parseInt(alumno.getIdEmpresa());
+    Usuario alumno = PreferencesHelper.recuperarUsuari("User", getApplication().getApplicationContext());
 
     public EmpresaViewModel(@NonNull Application application) {
         super(application);
@@ -23,41 +23,56 @@ public class EmpresaViewModel extends AndroidViewModel {
 
     public String getNombreEmpresa(){
         db.open();
-        Cursor c = db.obtenerEmpresa(empresa);
+        Cursor c = db.obtenerAlumno(Integer.parseInt(alumno.getId()));
         c.moveToFirst();
+        int empresa = c.getInt(1);
+        Cursor cursor = db.obtenerEmpresa(empresa);
+        cursor.moveToFirst();
         db.close();
-        return c.getString(1);
+        return cursor.getString(1);
     }
 
     public String getCorreoEmpresa(){
         db.open();
-        Cursor c = db.obtenerEmpresa(empresa);
+        Cursor c = db.obtenerAlumno(Integer.parseInt(alumno.getId()));
         c.moveToFirst();
+        int empresa = c.getInt(1);
+        Cursor cursor = db.obtenerEmpresa(empresa);
+        cursor.moveToFirst();
         db.close();
-        return c.getString(2);
+        return cursor.getString(2);
     }
 
     public String getTelefonoEmpresa(){
         db.open();
-        Cursor c = db.obtenerEmpresa(empresa);
+        Cursor c = db.obtenerAlumno(Integer.parseInt(alumno.getId()));
         c.moveToFirst();
+        int empresa = c.getInt(1);
+        Cursor cursor = db.obtenerEmpresa(empresa);
+        cursor.moveToFirst();
         db.close();
-        return c.getString(5);
+        return cursor.getString(5);
     }
 
     public String getWebEmpresa(){
         db.open();
-        Cursor c = db.obtenerEmpresa(empresa);
+        Cursor c = db.obtenerAlumno(Integer.parseInt(alumno.getId()));
         c.moveToFirst();
+        int empresa = c.getInt(1);
+        Cursor cursor = db.obtenerEmpresa(empresa);
+        cursor.moveToFirst();
         db.close();
-        return c.getString(4);
+        return cursor.getString(4);
     }
 
     public String getDireccionEmpresa(){
         db.open();
-        Cursor c = db.obtenerEmpresa(empresa);
+        Cursor c = db.obtenerAlumno(Integer.parseInt(alumno.getId()));
         c.moveToFirst();
+        int empresa = c.getInt(1);
+        Cursor cursor = db.obtenerEmpresa(empresa);
+        cursor.moveToFirst();
         db.close();
-        return c.getString(3);
+        return cursor.getString(3);
     }
 }

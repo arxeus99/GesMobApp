@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModel;
 
 import com.valentelmadafaka.gesmobapp.model.Alumno;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
 public class AjustesViewModel extends AndroidViewModel {
@@ -15,9 +16,9 @@ public class AjustesViewModel extends AndroidViewModel {
         super(application);
     }
 
-    Alumno alumno = PreferencesHelper.recuperarUsuari("User", getApplication().getApplicationContext());
+    Usuario usuario = PreferencesHelper.recuperarUsuari("User", getApplication().getApplicationContext());
 
     public String getUserName(){
-        return alumno.getNombre();
+        return usuario.getNombre();
     }
 }

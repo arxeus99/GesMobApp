@@ -2,6 +2,8 @@ package com.valentelmadafaka.gesmobapp.model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +43,8 @@ public class MensajeArray extends ArrayAdapter<Mensaje> {
             TextView name = view.findViewById(R.id.name);
             gesMobDB = new GesMobDB(context);
             gesMobDB.open();
-            name.setText(gesMobDB.obtenerProfesor(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", context).getIdProfesor())).getString(1));
+            Cursor c = gesMobDB.obtenerAlumno(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", context).getId()));
+            name.setText(gesMobDB.obtenerUsuario(c.getInt(3)).getString(1));
             gesMobDB.close();
         }
         TextView messageBody = view.findViewById(R.id.message_body);
