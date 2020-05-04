@@ -3,6 +3,7 @@ package com.valentelmadafaka.gesmobapp.ui.tareas;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.Locale;
 public class TareaForm extends AppCompatActivity {
 
     EditText titulo, descripcion, horas;
+    Tarea t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class TareaForm extends AppCompatActivity {
         }else{
             GesMobDB gesMobDB = new GesMobDB(this);
             gesMobDB.open();
-            Tarea t = new Tarea();
+            t = new Tarea();
             t.setId((gesMobDB.obtenerNumeroTareas()+1)+"");
             t.setNombre(titulo.getText().toString());
             t.setDescripcion(descripcion.getText().toString());
@@ -58,11 +60,17 @@ public class TareaForm extends AppCompatActivity {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String currentDate = simpleDateFormat.format(new Date());
             t.setFecha(currentDate);
-            if(gesMobDB.insertaTarea(t) == -1){
-                Toast.makeText(this, "Error a l'afegir", Toast.LENGTH_SHORT).show();
-            }
             gesMobDB.close();
             finish();
+        }
+    }
+
+    public void finish(){
+        if(t != null){
+            Intent data = new Intent();
+            data.putExtra("tarea", t);
+            setResult(RESULT_OK, data);
+            super.finish();
         }
     }
 }

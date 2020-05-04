@@ -36,6 +36,7 @@ public class ObservacionArray extends ArrayAdapter<Observacion> {
         gesMobDB = new GesMobDB(context);
         gesMobDB.open();
         Cursor cursor = gesMobDB.obtenerUsuario(Integer.parseInt(observacion.getAutorId()));
+        cursor.moveToFirst();
         autor.setText(cursor.getString(1));
         contenido.setText(observacion.getContenido());
         gesMobDB.close();

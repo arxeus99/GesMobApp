@@ -25,9 +25,14 @@ import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_OK;
+
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    GesMobDB gesMobDB;
+    ArrayList<Tarea> tareas = new ArrayList<>();
+    TareaArray tareaArray;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,13 +43,13 @@ public class HomeFragment extends Fragment {
         crearTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), TareaForm.class));
+                startActivityForResult(new Intent(getActivity(), TareaForm.class), 11);
             }
         });
 
-        ArrayList<Tarea> tareas = new ArrayList<>();
 
-        GesMobDB gesMobDB = new GesMobDB(getActivity());
+
+        gesMobDB = new GesMobDB(getActivity());
         gesMobDB.open();
         Cursor c = gesMobDB.obtenerTareas();
         c.moveToFirst();
@@ -68,7 +73,7 @@ public class HomeFragment extends Fragment {
         }
 
         gesMobDB.close();
-        TareaArray tareaArray = new TareaArray(getActivity(), R.layout.tarea_view, tareas);
+        tareaArray = new TareaArray(getActivity(), R.layout.tarea_view, tareas);
         ListView listView = root.findViewById(R.id.tareas);
         listView.setAdapter(tareaArray);
 
@@ -79,9 +84,28 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), TareaDetail.class);
                 intent.putExtra("tarea", tarea);
                 startActivity(intent);
+
             }
         });
 
         return root;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && requestCode == 11){
+            if(data.hasExtra("tarea")){
+                Tarea t = (Tarea)data.getExtras().get("tarea");
+                gesMobDB = new GesMobDB(getActivity());
+                gesMobDB.open();
+                if(gesMobDB.insertaTarea(t) == -1){
+                    Toast.makeText(getActivity(), "Error a l'afegir", Toast.LENGTH_SHORT).show();
+                }
+                gesMobDB.close();
+                tareas.add(t);
+                tareaArray.notifyDataSetChanged();
+
+            }
+        }
     }
 }
