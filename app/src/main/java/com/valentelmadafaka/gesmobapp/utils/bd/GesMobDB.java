@@ -261,5 +261,9 @@ public class GesMobDB {
         return c;
     }
 
+    public void leerMensaje(long id){
+        bd.execSQL("UPDATE "+TAB_MENSAJE+" SET "+MENSAJE_LEIDO+" = 1 WHERE "+MENSAJE_ID+" = "+id);
+    }
+
 
 }

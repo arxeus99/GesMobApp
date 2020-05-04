@@ -3,11 +3,13 @@ package com.valentelmadafaka.gesmobapp.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -53,12 +55,19 @@ public class Mensajeria extends AppCompatActivity {
             mensajes.add(mensaje);
             c.moveToNext();
         }
+
+        for(Mensaje m : mensajes){
+            if(!m.getIdEmisor().equals(PreferencesHelper.recuperarUsuari("User", this).getId())){
+               m.setLeido(true);
+               bd.leerMensaje(Integer.parseInt(m.getId()));
+            }
+        }
         bd.close();
 
         mensajeArray = new MensajeArray(this, R.layout.mensaje_enviado, mensajes);
         listView = findViewById(R.id.messages_view);
         listView.setAdapter(mensajeArray);
-
+        listView.setSelection(mensajeArray.getCount()-1);
     }
 
     @Override
@@ -70,21 +79,35 @@ public class Mensajeria extends AppCompatActivity {
     }
 
     public void enviarVoid(View view) {
-        bd = new GesMobDB(this);
-        bd.open();
-        Cursor c = bd.obtenerAlumno(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", this).getId()));
-        Mensaje mensaje = new Mensaje();
-        mensaje.setId(bd.obtenerNumeroMensajes()+"");
-        mensaje.setIdEmisor(PreferencesHelper.recuperarUsuari("User", this).getId());
-        mensaje.setIdReceptor(c.getString(3));
-        mensaje.setContenido(mensajeText.getText().toString());
-        mensaje.setLeido(false);
-        //Toast.makeText(this, mensaje.getContenido(), Toast.LENGTH_SHORT).show();
-        bd.insertaMensaje(mensaje);
-        bd.close();
-        mensajeText.setText("");
-        mensajes.add(mensaje);
-        mensajeArray.notifyDataSetChanged();
+        if(!mensajeText.getText().toString().isEmpty()){
+            bd = new GesMobDB(this);
+            bd.open();
+            Cursor c = bd.obtenerAlumno(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", this).getId()));
+            c.moveToFirst();
+            Mensaje mensaje = new Mensaje();
+            mensaje.setId((bd.obtenerNumeroMensajes()+1)+"");
+            mensaje.setIdEmisor(PreferencesHelper.recuperarUsuari("User", this).getId());
+            mensaje.setIdReceptor(c.getString(3));
+            mensaje.setContenido(mensajeText.getText().toString());
+            mensaje.setLeido(false);
+            //Toast.makeText(this, mensaje.getContenido(), Toast.LENGTH_SHORT).show();
+            if(bd.insertaMensaje(mensaje) == -1){
+                Toast.makeText(this, "Error al afegir missatges", Toast.LENGTH_SHORT).show();
+            }
+            bd.close();
+            mensajeText.setText("");
+            mensajes.add(mensaje);
+            mensajeArray.notifyDataSetChanged();
+            InputMethodManager imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            View view1 = this.getCurrentFocus();
 
+            if(view1 == null){
+                view1 = new View(this);
+            }
+
+            imm.hideSoftInputFromWindow(view1.getWindowToken(), 0);
+
+            listView.setSelection(mensajeArray.getCount()-1);
+        }
     }
 }

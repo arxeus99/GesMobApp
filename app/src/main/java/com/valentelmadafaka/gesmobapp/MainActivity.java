@@ -12,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.valentelmadafaka.gesmobapp.model.Alumno;
 import com.valentelmadafaka.gesmobapp.model.Empresa;
+import com.valentelmadafaka.gesmobapp.model.Mensaje;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.Usuario;
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        try {
+//            Mensaje mensaje = JSONHelper.obtenerMensaje("{\"id\": 1, \"emisor\":2, \"receptor\":1, \"contenido\": \"Hola buenas probando\", \"leido\":1}");
+//            Mensaje mensaje2 = JSONHelper.obtenerMensaje("{\"id\": 2, \"emisor\":1, \"receptor\":2, \"contenido\": \"Hola buenas probando\", \"leido\":1}");
+//            Mensaje mensaje3 = JSONHelper.obtenerMensaje("{\"id\": 3, \"emisor\":2, \"receptor\":1, \"contenido\": \"Hola buenas probando\", \"leido\":1}");
+//            Mensaje mensaje4 = JSONHelper.obtenerMensaje("{\"id\": 4, \"emisor\":1, \"receptor\":2, \"contenido\": \"Hola buenas probando\", \"leido\":0}");
 //            Usuario ususario = JSONHelper.obtenerUsuario("{\"id\":1,\"nombre\":\"Yoshi\",\"email\":\"ydensham0@artisteer.com\",\"tipo\":\"alumno\"}");
 //            Alumno alumno = JSONHelper.obtenerAlumno("{\n" +
 //                    "  \"id\": 1,\n" +
@@ -125,6 +130,19 @@ public class MainActivity extends AppCompatActivity {
 //                        Toast.LENGTH_SHORT).show();
 //            }if(db.insertaTarea(t4) == -1){
 //                Toast.makeText(this, "Error a l’afegir t4",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//            if(db.insertaMensaje(mensaje) == -1){
+//                Toast.makeText(this, "Error al añadir mensaje 1",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaMensaje(mensaje2) == -1){
+//                Toast.makeText(this, "Error al añadir mensaje 1",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaMensaje(mensaje3) == -1){
+//                Toast.makeText(this, "Error al añadir mensaje 1",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaMensaje(mensaje4) == -1){
+//                Toast.makeText(this, "Error al añadir mensaje 1",
 //                        Toast.LENGTH_SHORT).show();
 //            }
 //            db.close();

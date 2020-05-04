@@ -43,8 +43,12 @@ public class MensajeArray extends ArrayAdapter<Mensaje> {
             TextView name = view.findViewById(R.id.name);
             gesMobDB = new GesMobDB(context);
             gesMobDB.open();
-            Cursor c = gesMobDB.obtenerAlumno(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", context).getId()));
-            name.setText(gesMobDB.obtenerUsuario(c.getInt(3)).getString(1));
+            Usuario alumno = PreferencesHelper.recuperarUsuari("User", context);
+            Cursor c = gesMobDB.obtenerAlumno(Integer.parseInt(alumno.getId()));
+            c.moveToFirst();
+            Cursor profesor = gesMobDB.obtenerUsuario(c.getInt(3));
+            profesor.moveToFirst();
+            name.setText(profesor.getString(1));
             gesMobDB.close();
         }
         TextView messageBody = view.findViewById(R.id.message_body);
