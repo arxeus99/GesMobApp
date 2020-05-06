@@ -8,7 +8,16 @@ public class Alumno extends Usuario {
     private String direccion;
     private String idEmpresa;
     private String idProfesor;
+    private int semanas;
 
+
+    public int getSemanas() {
+        return semanas;
+    }
+
+    public void setSemanas(int semanas) {
+        this.semanas = semanas;
+    }
 
     public String getIdEmpresa() {
         return idEmpresa;

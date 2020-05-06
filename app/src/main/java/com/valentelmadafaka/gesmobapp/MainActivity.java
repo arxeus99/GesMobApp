@@ -14,6 +14,7 @@ import com.valentelmadafaka.gesmobapp.model.Alumno;
 import com.valentelmadafaka.gesmobapp.model.Empresa;
 import com.valentelmadafaka.gesmobapp.model.Mensaje;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
+import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.ui.Mensajeria;
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"id\": 1,\n" +
 //                    "  \"direccion\": \"12025 Stoughton Hill\",\n" +
 //                    "  \"idProfesor\": 2,\n" +
-//                    "  \"idEmpresa\": 1\n" +
+//                    "  \"idEmpresa\": 1,\n" +
+//                    "  \"semanas\": 5\n" +
 //                    "}");
 //            Empresa empresa = JSONHelper.obtenerEmpresa("{\n" +
 //                    "  \"id\": 1,\n" +
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"id\": 1,\n" +
 //                    "  \"nombre\": \"Holdlamis\",\n" +
 //                    "  \"descripcion\": \"Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum.\",\n" +
-//                    "  \"fecha\": \"9/29/2019\",\n" +
+//                    "  \"fecha\": \"09/04/2020\",\n" +
 //                    "  \"horas\": 53,\n" +
 //                    "  \"realizada\": 0,\n" +
 //                    "  \"idAlumno\": 1,\n" +
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"id\": 2,\n" +
 //                    "  \"nombre\": \"Opela\",\n" +
 //                    "  \"descripcion\": \"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.\",\n" +
-//                    "  \"fecha\": \"8/21/2019\",\n" +
+//                    "  \"fecha\": \"22/04/2020\",\n" +
 //                    "  \"horas\": 27,\n" +
 //                    "  \"realizada\": 1,\n" +
 //                    "  \"idAlumno\": 1,\n" +
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"id\": 3,\n" +
 //                    "  \"nombre\": \"Sub-Ex\",\n" +
 //                    "  \"descripcion\": \"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl.\",\n" +
-//                    "  \"fecha\": \"2/4/2020\",\n" +
+//                    "  \"fecha\": \"15/04/2020\",\n" +
 //                    "  \"horas\": 65,\n" +
 //                    "  \"realizada\": 1,\n" +
 //                    "  \"idAlumno\": 1,\n" +
@@ -95,12 +97,18 @@ public class MainActivity extends AppCompatActivity {
 //                    "  \"id\": 4,\n" +
 //                    "  \"nombre\": \"Vagram\",\n" +
 //                    "  \"descripcion\": \"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\",\n" +
-//                    "  \"fecha\": \"5/28/2019\",\n" +
+//                    "  \"fecha\": \"29/04/2020\",\n" +
 //                    "  \"horas\": 78,\n" +
 //                    "  \"realizada\": 0,\n" +
 //                    "  \"idAlumno\": 1,\n" +
 //                    "  \"idProfesor\": 2\n" +
 //                    "}");
+//
+//            Semana s1 = JSONHelper.obtenerSemana("{\"id\":1,\"inicio\":\"06/04/2020\",\"fin\":\"12/04/2020\",\"horas\":17}");
+//            Semana s2 = JSONHelper.obtenerSemana("{\"id\":2,\"inicio\":\"13/04/2020\",\"fin\":\"19/04/2020\",\"horas\":22}");
+//            Semana s3 = JSONHelper.obtenerSemana("{\"id\":3,\"inicio\":\"20/04/2020\",\"fin\":\"26/04/2020\",\"horas\":15}");
+//            Semana s4 = JSONHelper.obtenerSemana("{\"id\":4,\"inicio\":\"27/04/2020\",\"fin\":\"03/05/2020\",\"horas\":21}");
+//            Semana s5 = JSONHelper.obtenerSemana("{\"id\":5,\"inicio\":\"04/05/2020\",\"fin\":\"10/05/2020\",\"horas\":23}");
 //
 //            GesMobDB db = new GesMobDB(this);
 //            db.open();
@@ -136,13 +144,29 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(this, "Error al añadir mensaje 1",
 //                        Toast.LENGTH_SHORT).show();
 //            }if(db.insertaMensaje(mensaje2) == -1){
-//                Toast.makeText(this, "Error al añadir mensaje 1",
+//                Toast.makeText(this, "Error al añadir mensaje 2",
 //                        Toast.LENGTH_SHORT).show();
 //            }if(db.insertaMensaje(mensaje3) == -1){
-//                Toast.makeText(this, "Error al añadir mensaje 1",
+//                Toast.makeText(this, "Error al añadir mensaje 3",
 //                        Toast.LENGTH_SHORT).show();
 //            }if(db.insertaMensaje(mensaje4) == -1){
-//                Toast.makeText(this, "Error al añadir mensaje 1",
+//                Toast.makeText(this, "Error al añadir mensaje 4",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//            if(db.insertaSemana(s1) == -1){
+//                Toast.makeText(this, "Error al añadir setmana 1",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaSemana(s2) == -1){
+//                Toast.makeText(this, "Error al añadir setmana 2",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaSemana(s3) == -1){
+//                Toast.makeText(this, "Error al añadir setmana 3",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaSemana(s4) == -1){
+//                Toast.makeText(this, "Error al añadir setmana 4",
+//                        Toast.LENGTH_SHORT).show();
+//            }if(db.insertaSemana(s5) == -1){
+//                Toast.makeText(this, "Error al añadir setmana 5",
 //                        Toast.LENGTH_SHORT).show();
 //            }
 //            db.close();

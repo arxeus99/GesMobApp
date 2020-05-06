@@ -9,103 +9,91 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
 
 import com.valentelmadafaka.gesmobapp.R;
+import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.TareaArray;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
+import com.valentelmadafaka.gesmobapp.ui.home.page.PlaceholderFragment;
+import com.valentelmadafaka.gesmobapp.ui.home.page.SectionsPagerAdapter;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaDetail;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaForm;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
+import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    GesMobDB gesMobDB;
-    ArrayList<Tarea> tareas = new ArrayList<>();
-    TareaArray tareaArray;
+    SectionsPagerAdapter sectionsPagerAdapter;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final Button crearTarea = root.findViewById(R.id.crearTareaButton);
-        crearTarea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent(getActivity(), TareaForm.class), 11);
-            }
-        });
+
+        Usuario usuario = PreferencesHelper.recuperarUsuari("User", getActivity());
 
 
 
-        gesMobDB = new GesMobDB(getActivity());
-        gesMobDB.open();
-        Cursor c = gesMobDB.obtenerTareas();
-        c.moveToFirst();
+        sectionsPagerAdapter = new SectionsPagerAdapter(getActivity(), getActivity().getSupportFragmentManager());
+        ViewPager viewPager = root.findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
 
-        while(!c.isAfterLast()){
-            Tarea t = new Tarea();
-            t.setId(c.getString(0));
-            t.setNombre(c.getString(1));
-            t.setDescripcion(c.getString(2));
-            t.setFecha(c.getString(3));
-            t.setHoras(c.getInt(4));
-            if(c.getInt(5) == 1){
-                t.setRealizada(true);
-            }else{
-                t.setRealizada(false);
-            }
-            t.setIdAlumno(c.getString(6));
-            t.setIdProfesor(c.getString(7));
-            tareas.add(t);
-            c.moveToNext();
+        Date fechaDeHoy = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+
+
+        if(usuario != null){
+            sectionsPagerAdapter.getSemanas();
+            sectionsPagerAdapter.notifyDataSetChanged();
         }
 
-        gesMobDB.close();
-        tareaArray = new TareaArray(getActivity(), R.layout.tarea_view, tareas);
-        ListView listView = root.findViewById(R.id.tareas);
-        listView.setAdapter(tareaArray);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Tarea tarea = (Tarea)parent.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), TareaDetail.class);
-                intent.putExtra("tarea", tarea);
-                startActivity(intent);
-
+        for(Semana s : obtenerSemanas()){
+            try {
+                if(PlaceholderFragment.saberFecha(dateFormat.parse(s.getInicio()), dateFormat.parse(s.getFin()), fechaDeHoy)){
+                    viewPager.setCurrentItem(Integer.parseInt(s.getId())-1);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        });
+        }
 
         return root;
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == 11){
-            if(data.hasExtra("tarea")){
-                Tarea t = (Tarea)data.getExtras().get("tarea");
-                gesMobDB = new GesMobDB(getActivity());
-                gesMobDB.open();
-                if(gesMobDB.insertaTarea(t) == -1){
-                    Toast.makeText(getActivity(), "Error a l'afegir", Toast.LENGTH_SHORT).show();
-                }
-                gesMobDB.close();
-                tareas.add(t);
-                tareaArray.notifyDataSetChanged();
-
-            }
+    private ArrayList<Semana> obtenerSemanas(){
+        ArrayList<Semana> semanas = new ArrayList<>();
+        GesMobDB gesMobDB = new GesMobDB(getActivity());
+        gesMobDB.open();
+        Cursor c = gesMobDB.obtenerSemanas();
+        c.moveToFirst();
+        while(!c.isAfterLast()){
+            Semana semana = new Semana();
+            semana.setId(c.getString(0));
+            semana.setInicio(c.getString(1));
+            semana.setFin(c.getString(2));
+            semana.setHoras(c.getInt(3));
+            c.moveToNext();
+            semanas.add(semana);
         }
+
+        return semanas;
     }
 }

@@ -70,7 +70,7 @@ public class TareaForm extends AppCompatActivity {
             Intent data = new Intent();
             data.putExtra("tarea", t);
             setResult(RESULT_OK, data);
-            super.finish();
         }
+        super.finish();
     }
 }

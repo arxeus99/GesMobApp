@@ -20,6 +20,7 @@ import com.valentelmadafaka.gesmobapp.model.Observacion;
 import com.valentelmadafaka.gesmobapp.model.ObservacionArray;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
+import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ public class TareaDetail extends AppCompatActivity {
     TextView titulo, descripcion, duracion;
     Button observacion;
     GesMobDB db;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class TareaDetail extends AppCompatActivity {
         db = new GesMobDB(this);
 
 
-        ArrayList<Observacion> observaciones = new ArrayList<>();
+        final ArrayList<Observacion> observaciones = new ArrayList<>();
 
         db.open();
         Cursor c = db.obetenerObservacionesDeTareas(Integer.parseInt(tarea.getId()));
@@ -63,8 +65,8 @@ public class TareaDetail extends AppCompatActivity {
         }
         db.close();
 
-        ObservacionArray observacionArray = new ObservacionArray(this, R.layout.observacion_view, observaciones);
-        ListView listView = findViewById(R.id.observaciones);
+        final ObservacionArray observacionArray = new ObservacionArray(this, R.layout.observacion_view, observaciones);
+        listView = findViewById(R.id.observaciones);
         listView.setAdapter(observacionArray);
 
         observacion.setOnClickListener(new View.OnClickListener() {
@@ -88,11 +90,13 @@ public class TareaDetail extends AppCompatActivity {
                                         Observacion observacion = new Observacion();
                                         db.open();
                                         observacion.setId((db.obetenerNumeroObservaciones()+1)+"");
-                                        observacion.setAutorId("1 P");
+                                        observacion.setAutorId(PreferencesHelper.recuperarUsuari("User", TareaDetail.this).getId());
                                         observacion.setTareaId(tarea.getId());
                                         observacion.setContenido(userInput.getText().toString());
                                         db.insertaObservacion(observacion);
                                         db.close();
+                                        observaciones.add(observacion);
+                                        observacionArray.notifyDataSetChanged();
                                     }
                                 })
                         .setNegativeButton("Cancel",

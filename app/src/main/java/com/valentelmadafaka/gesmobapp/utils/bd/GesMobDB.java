@@ -11,6 +11,7 @@ import com.valentelmadafaka.gesmobapp.model.Empresa;
 import com.valentelmadafaka.gesmobapp.model.Mensaje;
 import com.valentelmadafaka.gesmobapp.model.Observacion;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
+import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.Usuario;
 
@@ -43,12 +44,14 @@ public class GesMobDB {
     public static final String ALUMNO_ID_EMPRESA = "idEmpresa";
     public static final String ALUMNO_DIRECCION = "direccion";
     public static final String ALUMNO_ID_PROFESOR = "idProfesor";
+    public static final String ALUMNO_SEMANAS = "semanas";
     public static final String CREATE_TABLE_ALUMNO = "create table " + TAB_ALUMNO +
             "("
             + ALUMNO_ID + " integer primary key, "
             + ALUMNO_ID_EMPRESA + " text not null, "
             + ALUMNO_DIRECCION + " text not null, "
-            + ALUMNO_ID_PROFESOR + " text not null)";
+            + ALUMNO_ID_PROFESOR + " text not null,"
+            + ALUMNO_SEMANAS + " integer not null)";
     public static final String TAB_EMPRESA = "empresa";
     public static final String EMPRESA_ID = "id";
     public static final String EMPRESA_NOMBRE = "nombre";
@@ -107,6 +110,17 @@ public class GesMobDB {
             + OBSERVACION_ID_EMISOR + " text not null, "
             + OBSERVACION_ID_TAREA + " text not null, "
             + OBSERVACION_CONTENIDO + " text not null)";
+    public static final String TAB_SEMANAS = "semanas";
+    public static final String SEMANA_ID = "id";
+    public static final String SEMANA_INICIO = "inicio";
+    public static final String SEMANA_FINAL = "final";
+    public static final String SEMANA_HORAS = "horas";
+    public static final String CREATE_TABLE_SEMANA = "create table " + TAB_SEMANAS +
+            "("
+            + SEMANA_ID + " integer primary key, "
+            + SEMANA_INICIO + " text not null, "
+            + SEMANA_FINAL + " text not null, "
+            + SEMANA_HORAS + " integer not null)";
     private Context context;
     private HelperDB helperDB;
     private SQLiteDatabase bd;
@@ -150,11 +164,12 @@ public class GesMobDB {
         contentValues.put(ALUMNO_ID_EMPRESA, alumno.getIdEmpresa());
         contentValues.put(ALUMNO_DIRECCION, alumno.getDireccion());
         contentValues.put(ALUMNO_ID_PROFESOR, alumno.getIdProfesor());
+        contentValues.put(ALUMNO_SEMANAS, alumno.getSemanas());
         return bd.insert(TAB_ALUMNO, null, contentValues);
     }
 
     public Cursor obtenerAlumno(long id){
-        Cursor cursor = bd.query(true, TAB_ALUMNO, new String[]{ALUMNO_ID, ALUMNO_ID_EMPRESA, ALUMNO_DIRECCION, ALUMNO_ID_PROFESOR}, ALUMNO_ID + " = " + id, null, null, null, null, null);
+        Cursor cursor = bd.query(true, TAB_ALUMNO, new String[]{ALUMNO_ID, ALUMNO_ID_EMPRESA, ALUMNO_DIRECCION, ALUMNO_ID_PROFESOR, ALUMNO_SEMANAS}, ALUMNO_ID + " = " + id, null, null, null, null, null);
         return cursor;
     }
 
@@ -246,6 +261,20 @@ public class GesMobDB {
         return cursor;
     }
 
+    public long insertaSemana(Semana semana){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(SEMANA_ID, semana.getId());
+        contentValues.put(SEMANA_INICIO, semana.getInicio());
+        contentValues.put(SEMANA_FINAL, semana.getFin());
+        contentValues.put(SEMANA_HORAS, semana.getHoras());
+        return bd.insert(TAB_SEMANAS, null, contentValues);
+    }
+
+    public Cursor obtenerSemanas(){
+        Cursor cursor = bd.query(true, TAB_SEMANAS, new String[]{SEMANA_ID, SEMANA_INICIO, SEMANA_FINAL, SEMANA_HORAS}, null, null, null, null, null, null);
+        return cursor;
+    }
+
     public void finalizarTarea(long id){
         bd.execSQL("UPDATE "+TAB_TAREA+" SET "+TAREA_REALIZADA+" = 1 WHERE "+TAREA_ID+" = "+id);
     }
@@ -265,5 +294,8 @@ public class GesMobDB {
         bd.execSQL("UPDATE "+TAB_MENSAJE+" SET "+MENSAJE_LEIDO+" = 1 WHERE "+MENSAJE_ID+" = "+id);
     }
 
+    public void cambiarSemanas(long id, int semanas){
+        bd.execSQL("UPDATE "+TAB_ALUMNO+" SET "+ALUMNO_SEMANAS+" = "+semanas+" WHERE "+ALUMNO_ID+" = "+id);
+    }
 
 }

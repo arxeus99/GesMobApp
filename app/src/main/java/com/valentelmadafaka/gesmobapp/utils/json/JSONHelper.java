@@ -7,6 +7,7 @@ import com.valentelmadafaka.gesmobapp.model.Alumno;
 import com.valentelmadafaka.gesmobapp.model.Empresa;
 import com.valentelmadafaka.gesmobapp.model.Mensaje;
 import com.valentelmadafaka.gesmobapp.model.Profesor;
+import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
@@ -41,6 +42,7 @@ public abstract class JSONHelper {
         alumno.setDireccion(data.getString("direccion"));
         alumno.setIdProfesor(data.getString("idProfesor"));
         alumno.setIdEmpresa(data.getString("idEmpresa"));
+        alumno.setSemanas(data.getInt("semanas"));
         return alumno;
     }
 
@@ -87,5 +89,15 @@ public abstract class JSONHelper {
             mensaje.setLeido(false);
         }
         return mensaje;
+    }
+
+    public static Semana obtenerSemana(String JSON) throws JSONException{
+        JSONObject data = new JSONObject(JSON);
+        Semana semana = new Semana();
+        semana.setId(data.getString("id"));
+        semana.setInicio(data.getString("inicio"));
+        semana.setFin(data.getString("fin"));
+        semana.setHoras(data.getInt("horas"));
+        return semana;
     }
 }

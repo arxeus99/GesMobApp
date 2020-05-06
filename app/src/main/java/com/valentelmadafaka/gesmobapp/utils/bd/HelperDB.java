@@ -10,6 +10,7 @@ import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_ALUM
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_EMPRESA;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_MENSAJE;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_OBSERVACION;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_SEMANA;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_TAREA;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.CREATE_TABLE_USUARIO;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.NOMBRE_DB;
@@ -17,6 +18,7 @@ import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_ALUMNO;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_EMPRESA;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_MENSAJE;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_OBSERVACION;
+import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_SEMANAS;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_TAREA;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.TAB_USUARIO;
 import static com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB.VERSION_DB;
@@ -34,6 +36,7 @@ public class HelperDB extends SQLiteOpenHelper {
             db.execSQL(CREATE_TABLE_TAREA);
             db.execSQL(CREATE_TABLE_MENSAJE);
             db.execSQL(CREATE_TABLE_OBSERVACION);
+            db.execSQL(CREATE_TABLE_SEMANA);
         }catch (SQLException e){
             System.out.printf(e.getMessage());
         }
@@ -50,6 +53,7 @@ public class HelperDB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TAB_TAREA);
         db.execSQL("DROP TABLE IF EXISTS " + TAB_MENSAJE);
         db.execSQL("DROP TABLE IF EXISTS " + TAB_OBSERVACION);
+        db.execSQL("DROP TABLE IF EXISTS " + TAB_SEMANAS);
         onCreate(db);
     }
 }
