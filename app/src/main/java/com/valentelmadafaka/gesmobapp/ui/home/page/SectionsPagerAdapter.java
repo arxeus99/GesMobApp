@@ -22,13 +22,33 @@ import java.util.Date;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private int[] TAB_TITLES = {1};
+    private int[] TAB_TITLES;
     private Context mContext;
     private static GesMobDB gesMobDB = new GesMobDB(GesMobApp.getAppContext());
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    public SectionsPagerAdapter(Context context, FragmentManager fm, Usuario usuario) {
         super(fm);
         mContext = context;
+        int[] resultado;
+        if(usuario == null){
+            resultado = new int[1];
+            resultado[0] = 1;
+        }else{
+            gesMobDB.open();
+            Cursor c = gesMobDB.obtenerAlumno(Integer.parseInt(usuario.getId()));
+            c.moveToFirst();
+            int semanas = c.getInt(4);
+            ArrayList<Integer> numeros = new ArrayList<>();
+            for(int i = 1; i < semanas+1; i++){
+                numeros.add(i);
+            }
+            resultado = new int[numeros.size()];
+            for(int i = 0; i<resultado.length; i++){
+                resultado[i] = numeros.get(i).intValue();
+            }
+            gesMobDB.close();
+        }
+        this.TAB_TITLES = resultado;
     }
 
     @Override
@@ -48,22 +68,5 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         // Show 2 total pages.
         return TAB_TITLES.length;
-    }
-
-    public void getSemanas(){
-        gesMobDB.open();
-        Cursor c = gesMobDB.obtenerAlumno(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", GesMobApp.getAppContext()).getId()));
-        c.moveToFirst();
-        int semanas = c.getInt(4);
-        ArrayList<Integer> numeros = new ArrayList<>();
-        for(int i = 1; i < semanas+1; i++){
-            numeros.add(i);
-        }
-        int[] resultado = new int[numeros.size()];
-        for(int i = 0; i<resultado.length; i++){
-            resultado[i] = numeros.get(i).intValue();
-        }
-        this.TAB_TITLES = resultado;
-        gesMobDB.close();
     }
 }

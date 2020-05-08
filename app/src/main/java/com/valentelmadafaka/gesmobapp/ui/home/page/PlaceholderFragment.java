@@ -115,6 +115,23 @@ public class PlaceholderFragment extends Fragment {
                 }
 
                 gesMobDB.close();
+
+                final TextView info = root.findViewById(R.id.info);
+
+                int horasEnTareas = 0;
+                for(Tarea t : tareas){
+                    horasEnTareas += t.getHoras();
+                }
+
+                if(semana.getHoras()> horasEnTareas){
+                    info.setText("Aun no tienes suficientes horas en tareas");
+                }else if(semana.getHoras() == horasEnTareas){
+                    info.setText("Tienes exactamente las horas necesarias en tareas de la semana");
+                }else{
+                    info.setText("Tienes horas en tareas de más");
+                }
+
+
                 tareaArray = new TareaArray(getActivity(), R.layout.tarea_view, tareas);
                 ListView listView = root.findViewById(R.id.tareas);
                 listView.setAdapter(tareaArray);
@@ -125,7 +142,7 @@ public class PlaceholderFragment extends Fragment {
                         Tarea tarea = (Tarea)parent.getItemAtPosition(position);
                         Intent intent = new Intent(getActivity(), TareaDetail.class);
                         intent.putExtra("tarea", tarea);
-                        startActivity(intent);
+                        startActivityForResult(intent, 10);
 
                     }
                 });
@@ -157,6 +174,17 @@ public class PlaceholderFragment extends Fragment {
                 tareas.add(t);
                 tareaArray.notifyDataSetChanged();
 
+            }
+        }else if(resultCode == RESULT_OK && requestCode == 10){
+            if(data.hasExtra("tarea")){
+                Tarea t = (Tarea) data.getExtras().get("tarea");
+                for(Tarea tarea : tareas){
+                    if(tarea.getId().equals(t.getId())){
+                        tareas.remove(tarea);
+                        tareas.add(t);
+                    }
+                }
+                tareaArray.notifyDataSetChanged();
             }
         }
     }

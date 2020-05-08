@@ -18,6 +18,7 @@ import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.ui.Mensajeria;
+import com.valentelmadafaka.gesmobapp.ui.home.page.SectionsPagerAdapter;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.json.JSONHelper;
 import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
@@ -30,6 +31,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import org.json.JSONException;
 

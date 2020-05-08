@@ -37,32 +37,23 @@ import java.util.Date;
 import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
-
-    private HomeViewModel homeViewModel;
     SectionsPagerAdapter sectionsPagerAdapter;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         Usuario usuario = PreferencesHelper.recuperarUsuari("User", getActivity());
 
 
 
-        sectionsPagerAdapter = new SectionsPagerAdapter(getActivity(), getActivity().getSupportFragmentManager());
+        sectionsPagerAdapter = new SectionsPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), usuario);
+        //sectionsPagerAdapter.notifyDataSetChanged();
         ViewPager viewPager = root.findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
 
         Date fechaDeHoy = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-
-
-        if(usuario != null){
-            sectionsPagerAdapter.getSemanas();
-            sectionsPagerAdapter.notifyDataSetChanged();
-        }
 
 
         for(Semana s : obtenerSemanas()){
@@ -74,7 +65,6 @@ public class HomeFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-
         return root;
     }
 

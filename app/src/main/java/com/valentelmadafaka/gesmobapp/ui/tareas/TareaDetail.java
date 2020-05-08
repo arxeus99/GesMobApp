@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ public class TareaDetail extends AppCompatActivity {
     Button observacion;
     GesMobDB db;
     ListView listView;
+    Boolean cambiada = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +131,20 @@ public class TareaDetail extends AppCompatActivity {
         db.open();
         db.finalizarTarea(Integer.parseInt(tarea.getId()));
         db.close();
+        cambiada = true;
+        finish();
+    }
+
+
+    public void finish(){
+
+        if(cambiada){
+            Intent data = new Intent();
+            data.putExtra("tarea", tarea);
+            setResult(RESULT_OK, data);
+        }
+
+        super.finish();
     }
 
 
