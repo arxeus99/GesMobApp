@@ -2,6 +2,7 @@ package com.valentelmadafaka.gesmobapp.ui.home;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.tabs.TabLayout;
 import com.valentelmadafaka.gesmobapp.R;
 import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
@@ -37,6 +40,9 @@ import java.util.Date;
 import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
+
+    private TabLayout tabLayout;
+    private ViewPager pager;
     SectionsPagerAdapter sectionsPagerAdapter;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -47,10 +53,11 @@ public class HomeFragment extends Fragment {
 
 
 
+
         sectionsPagerAdapter = new SectionsPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), usuario);
         //sectionsPagerAdapter.notifyDataSetChanged();
-        ViewPager viewPager = root.findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
+        pager = root.findViewById(R.id.pager);
+        pager.setAdapter(sectionsPagerAdapter);
 
         Date fechaDeHoy = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -59,7 +66,7 @@ public class HomeFragment extends Fragment {
         for(Semana s : obtenerSemanas()){
             try {
                 if(PlaceholderFragment.saberFecha(dateFormat.parse(s.getInicio()), dateFormat.parse(s.getFin()), fechaDeHoy)){
-                    viewPager.setCurrentItem(Integer.parseInt(s.getId())-1);
+                    pager.setCurrentItem(Integer.parseInt(s.getId())-1);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
