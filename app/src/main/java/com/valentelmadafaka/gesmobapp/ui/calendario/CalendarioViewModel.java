@@ -1,11 +1,9 @@
-package com.valentelmadafaka.gesmobapp.ui.home;
+package com.valentelmadafaka.gesmobapp.ui.calendario;
 
 import android.app.Application;
 import android.database.Cursor;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.valentelmadafaka.gesmobapp.model.Semana;
@@ -13,17 +11,12 @@ import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 
 import java.util.ArrayList;
 
-public class HomeViewModel extends AndroidViewModel {
+public class CalendarioViewModel extends AndroidViewModel {
 
-    private MutableLiveData<String> mText;
-
-    public HomeViewModel(Application application) {
+    public CalendarioViewModel(Application application){
         super(application);
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
 
     public ArrayList<Semana> getSemanas(){
         ArrayList<Semana> semanas = new ArrayList<>();
@@ -43,5 +36,5 @@ public class HomeViewModel extends AndroidViewModel {
 
         return semanas;
     }
-
+    // TODO: Implement the ViewModel
 }

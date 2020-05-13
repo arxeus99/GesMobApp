@@ -17,6 +17,10 @@
             android:icon="@drawable/empresa"
             android:title="@string/menu_empresa"/>
         <item
+            android:id="@+id/nav_calendario"
+            android:icon="@drawable/calendario"
+            android:title="Calendario"/>
+        <item
             android:id="@+id/nav_ajustes"
             android:icon="@drawable/ajustes"
             android:title="@string/menu_ajustes"/>

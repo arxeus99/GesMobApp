@@ -23,7 +23,12 @@
     <fragment
         android:id="@+id/nav_ajustes"
         android:name="com.valentelmadafaka.gesmobapp.ui.ajustes.AjustesFragment"
-        android:label="ajustes_fragment"
+        android:label="@string/menu_ajustes"
         tools:layout="@layout/ajustes_fragment" />
+    <fragment
+        android:id="@+id/nav_calendario"
+        android:name="com.valentelmadafaka.gesmobapp.ui.calendario.CalendarioFragment"
+        android:label="calendario"
+        tools:layout="@layout/calendario_fragment"/>
 
 </navigation>

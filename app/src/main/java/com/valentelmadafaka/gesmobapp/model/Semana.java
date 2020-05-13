@@ -1,6 +1,8 @@
 package com.valentelmadafaka.gesmobapp.model;
 
-public class Semana {
+import java.io.Serializable;
+
+public class Semana implements Serializable {
     private String id;
     private String inicio;
     private String fin;
