@@ -261,6 +261,11 @@ public class GesMobDB {
         return cursor;
     }
 
+    public Cursor obtenerAlumnosDeProfeosor(long idProfesor){
+        Cursor cursor = bd.query(true, TAB_ALUMNO, new String[]{ALUMNO_ID}, ALUMNO_ID_PROFESOR + " = "+idProfesor, null, null, null, null, null);
+        return cursor;
+    }
+
     public long insertaSemana(Semana semana){
         ContentValues contentValues = new ContentValues();
         contentValues.put(SEMANA_ID, semana.getId());

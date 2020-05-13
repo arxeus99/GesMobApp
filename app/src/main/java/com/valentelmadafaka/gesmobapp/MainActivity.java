@@ -202,6 +202,12 @@ public class MainActivity extends AppCompatActivity {
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        if(PreferencesHelper.recuperarUsuari("User", this).getTipo().equals("profesor")){
+            Menu nav_menu = navigationView.getMenu();
+            nav_menu.findItem(R.id.nav_calendario).setVisible(false);
+            nav_menu.findItem(R.id.nav_empresa).setVisible(false);
+            nav_menu.findItem(R.id.nav_profesor).setVisible(false);
+        }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(

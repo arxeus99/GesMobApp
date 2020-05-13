@@ -9,7 +9,7 @@
         android:id="@+id/nav_home"
         android:name="com.valentelmadafaka.gesmobapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home_alumno"/>
     <fragment
         android:id="@+id/nav_profesor"
         android:name="com.valentelmadafaka.gesmobapp.ui.profesor.ProfesorFragment"

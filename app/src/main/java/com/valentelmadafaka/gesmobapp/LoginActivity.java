@@ -44,12 +44,8 @@ public class LoginActivity extends AppCompatActivity {
                 usuario.setNombre(c.getString(1));
                 usuario.setEmail(c.getString(2));
                 usuario.setTipo(c.getString(3));
-                if(usuario.getTipo().equals("profesor")){
-                    respuesta.setText("La aplicación de profesor está en proceso");
-                }else{
-                    PreferencesHelper.desaUsuari("User", usuario, this);
-                    startActivity(new Intent(this, MainActivity.class));
-                }
+                PreferencesHelper.desaUsuari("User", usuario, this);
+                startActivity(new Intent(this, MainActivity.class));
             }
             bd.close();
         }else{
