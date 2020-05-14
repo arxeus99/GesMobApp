@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:clipToPadding="false"
     android:focusableInTouchMode="true"
-    tools:context=".ui.Mensajeria">
+    tools:context=".ui.mensajeria.Mensajeria">
 
     <ListView
         android:layout_width="match_parent"

@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.alumno.PerfilAlumno"></activity>
+        <activity android:name=".ui.mensajeria.Chats"></activity>
+        <activity android:name=".ui.alumno.PerfilAlumno" />
         <activity android:name=".ui.calendario.SemanaDetalle" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".ui.tareas.TareaDetail" />
@@ -18,7 +19,7 @@
             android:name=".ui.tareas.TareaForm"
             android:label="Crear nueva tarea" />
         <activity
-            android:name=".ui.Mensajeria"
+            android:name=".ui.mensajeria.Mensajeria"
             android:label="Chat" />
         <activity
             android:name=".MainActivity"

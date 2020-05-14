@@ -21,18 +21,21 @@ public class MensajeArray extends ArrayAdapter<Mensaje> {
     private Context context;
     private ArrayList<Mensaje> mensajes;
     private GesMobDB gesMobDB;
+    private Usuario receptor;
 
-    public MensajeArray(Context context, int resource, ArrayList<Mensaje> mensajes){
+    public MensajeArray(Context context, int resource, ArrayList<Mensaje> mensajes, Usuario receptor){
         super(context, resource, mensajes);
         this.context = context;
         this.mensajes = mensajes;
+        this.receptor = receptor;
     }
 
     public View getView(int position, View convertView, ViewGroup parents){
         Mensaje mensaje = mensajes.get(position);
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        Usuario usuario = PreferencesHelper.recuperarUsuari("User", context);
         View view;
-        if(mensaje.getIdEmisor().equals(PreferencesHelper.recuperarUsuari("User", context).getId())){
+        if(mensaje.getIdEmisor().equals(usuario.getId())){
             if(mensaje.isLeido()){
                 view = inflater.inflate(R.layout.mensaje_abierto, null);
             }else{
@@ -41,15 +44,8 @@ public class MensajeArray extends ArrayAdapter<Mensaje> {
         }else{
             view = inflater.inflate(R.layout.mensaje_recibido, null);
             TextView name = view.findViewById(R.id.name);
-            gesMobDB = new GesMobDB(context);
-            gesMobDB.open();
-            Usuario alumno = PreferencesHelper.recuperarUsuari("User", context);
-            Cursor c = gesMobDB.obtenerAlumno(Integer.parseInt(alumno.getId()));
-            c.moveToFirst();
-            Cursor profesor = gesMobDB.obtenerUsuario(c.getInt(3));
-            profesor.moveToFirst();
-            name.setText(profesor.getString(1));
-            gesMobDB.close();
+            name.setText(receptor.getNombre());
+
         }
         TextView messageBody = view.findViewById(R.id.message_body);
         messageBody.setText(mensaje.getContenido());

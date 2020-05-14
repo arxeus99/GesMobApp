@@ -42,7 +42,7 @@ public abstract class JSONHelper {
         alumno.setDireccion(data.getString("direccion"));
         alumno.setIdProfesor(data.getString("idProfesor"));
         alumno.setIdEmpresa(data.getString("idEmpresa"));
-        alumno.setSemanas(data.getInt("semanas"));
+        alumno.setSemanas(data.getString("semanas"));
         return alumno;
     }
 

@@ -22,6 +22,7 @@ import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.TareaArray;
 import com.valentelmadafaka.gesmobapp.model.Usuario;
+import com.valentelmadafaka.gesmobapp.ui.alumno.PerfilAlumno;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaDetail;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaForm;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
@@ -46,130 +47,143 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        if(PreferencesHelper.recuperarUsuari("User", getActivity()).getTipo().equals("alumno")){
-            root = inflater.inflate(R.layout.fragment_home_alumno, container, false);
-            homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        if(PreferencesHelper.recuperarUsuari("User", getActivity()) != null){
+            if(PreferencesHelper.recuperarUsuari("User", getActivity()).getTipo().equals("alumno")){
+                root = inflater.inflate(R.layout.fragment_home_alumno, container, false);
+                homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
-            final TextView textView = root.findViewById(R.id.semana);
-            final TextView fechas = root.findViewById(R.id.fechas);
-            final TextView info = root.findViewById(R.id.info);
-            GesMobDB gesMobDB;
-
-
-
-            Date fechaDeHoy = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                final TextView textView = root.findViewById(R.id.semana);
+                final TextView fechas = root.findViewById(R.id.fechas);
+                final TextView info = root.findViewById(R.id.info);
+                GesMobDB gesMobDB;
 
 
-            for(Semana s : homeViewModel.getSemanas()){
-                try {
-                    if(saberFecha(dateFormat.parse(s.getInicio()), dateFormat.parse(s.getFin()), fechaDeHoy)){
-                        textView.setText("Semana "+s.getId());
-                        fechas.setText(s.getInicio()+" - "+s.getFin());
 
-                        gesMobDB = new GesMobDB(getActivity());
-                        gesMobDB.open();
-                        Cursor c = gesMobDB.obtenerTareas();
-                        c.moveToFirst();
-                        tareas.clear();
-                        while(!c.isAfterLast()){
-                            Tarea t = new Tarea();
-                            t.setId(c.getString(0));
-                            t.setNombre(c.getString(1));
-                            t.setDescripcion(c.getString(2));
-                            t.setFecha(c.getString(3));
-                            t.setHoras(c.getInt(4));
-                            if(c.getInt(5) == 1){
-                                t.setRealizada(true);
+                Date fechaDeHoy = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+
+                for(Semana s : homeViewModel.getSemanas()){
+                    try {
+                        if(saberFecha(dateFormat.parse(s.getInicio()), dateFormat.parse(s.getFin()), fechaDeHoy)){
+                            textView.setText("Semana "+s.getId());
+                            fechas.setText(s.getInicio()+" - "+s.getFin());
+
+                            gesMobDB = new GesMobDB(getActivity());
+                            gesMobDB.open();
+                            Cursor c = gesMobDB.obtenerTareas();
+                            c.moveToFirst();
+                            tareas.clear();
+                            while(!c.isAfterLast()){
+                                Tarea t = new Tarea();
+                                t.setId(c.getString(0));
+                                t.setNombre(c.getString(1));
+                                t.setDescripcion(c.getString(2));
+                                t.setFecha(c.getString(3));
+                                t.setHoras(c.getInt(4));
+                                if(c.getInt(5) == 1){
+                                    t.setRealizada(true);
+                                }else{
+                                    t.setRealizada(false);
+                                }
+                                t.setIdAlumno(c.getString(6));
+                                t.setIdProfesor(c.getString(7));
+                                try {
+                                    if(saberFecha(dateFormat.parse(s.getInicio()), dateFormat.parse(s.getFin()), dateFormat.parse(t.getFecha())))
+                                        tareas.add(t);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                c.moveToNext();
+                            }
+
+                            gesMobDB.close();
+
+
+                            int horasEnTareas = 0;
+                            for(Tarea t : tareas){
+                                horasEnTareas += t.getHoras();
+                            }
+
+                            if(s.getHoras()> horasEnTareas){
+                                info.setText("Aun no tienes suficientes horas en tareas");
+                            }else if(s.getHoras() == horasEnTareas){
+                                info.setText("Tienes exactamente las horas necesarias en tareas de la semana");
                             }else{
-                                t.setRealizada(false);
+                                info.setText("Tienes horas en tareas de más");
                             }
-                            t.setIdAlumno(c.getString(6));
-                            t.setIdProfesor(c.getString(7));
-                            try {
-                                if(saberFecha(dateFormat.parse(s.getInicio()), dateFormat.parse(s.getFin()), dateFormat.parse(t.getFecha())))
-                                    tareas.add(t);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                            c.moveToNext();
+
+
+                            tareaArray = new TareaArray(getActivity(), R.layout.tarea_view, tareas);
+                            ListView listView = root.findViewById(R.id.tareas);
+                            listView.setAdapter(tareaArray);
+
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Tarea tarea = (Tarea)parent.getItemAtPosition(position);
+                                    Intent intent = new Intent(getActivity(), TareaDetail.class);
+                                    intent.putExtra("tarea", tarea);
+                                    startActivityForResult(intent, 10);
+
+                                }
+                            });
+
+                            final Button crearTarea = root.findViewById(R.id.crearTareaButton);
+                            crearTarea.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivityForResult(new Intent(getActivity(), TareaForm.class), 11);
+                                }
+                            });
                         }
-
-                        gesMobDB.close();
-
-
-                        int horasEnTareas = 0;
-                        for(Tarea t : tareas){
-                            horasEnTareas += t.getHoras();
-                        }
-
-                        if(s.getHoras()> horasEnTareas){
-                            info.setText("Aun no tienes suficientes horas en tareas");
-                        }else if(s.getHoras() == horasEnTareas){
-                            info.setText("Tienes exactamente las horas necesarias en tareas de la semana");
-                        }else{
-                            info.setText("Tienes horas en tareas de más");
-                        }
-
-
-                        tareaArray = new TareaArray(getActivity(), R.layout.tarea_view, tareas);
-                        ListView listView = root.findViewById(R.id.tareas);
-                        listView.setAdapter(tareaArray);
-
-                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Tarea tarea = (Tarea)parent.getItemAtPosition(position);
-                                Intent intent = new Intent(getActivity(), TareaDetail.class);
-                                intent.putExtra("tarea", tarea);
-                                startActivityForResult(intent, 10);
-
-                            }
-                        });
-
-                        final Button crearTarea = root.findViewById(R.id.crearTareaButton);
-                        crearTarea.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivityForResult(new Intent(getActivity(), TareaForm.class), 11);
-                            }
-                        });
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                } catch (ParseException e) {
-                    e.printStackTrace();
                 }
+            }else{
+                root = inflater.inflate(R.layout.fragment_home_profesor, container, false);
+
+                final ArrayList<Usuario> alumnos = new ArrayList<>();
+                gesMobDB = new GesMobDB(getActivity());
+                gesMobDB.open();
+                Cursor c = gesMobDB.obtenerAlumnosDeProfeosor(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", getActivity()).getId()));
+                c.moveToFirst();
+                while(!c.isAfterLast()){
+                    Cursor cursor = gesMobDB.obtenerUsuario(c.getInt(0));
+                    cursor.moveToFirst();
+                    Usuario u = new Usuario();
+                    u.setId(cursor.getString(0));
+                    u.setNombre(cursor.getString(1));
+                    u.setEmail(cursor.getString(2));
+                    u.setTipo(cursor.getString(3));
+                    alumnos.add(u);
+                    c.moveToNext();
+                }
+
+                gesMobDB.close();
+
+                ListView listView = root.findViewById(R.id.alumnos);
+                alumnoArray = new AlumnoArray(getActivity(), R.layout.alumno_view, alumnos);
+                listView.setAdapter(alumnoArray);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Usuario alumno = (Usuario)parent.getItemAtPosition(position);
+                        Intent intent = new Intent(getActivity(), PerfilAlumno.class);
+                        intent.putExtra("alumno", alumno);
+                        startActivity(intent);
+                    }
+                });
+
             }
-        }else{
-            root = inflater.inflate(R.layout.fragment_home_profesor, container, false);
 
-            ArrayList<Usuario> alumnos = new ArrayList<>();
-            gesMobDB = new GesMobDB(getActivity());
-            gesMobDB.open();
-            Cursor c = gesMobDB.obtenerAlumnosDeProfeosor(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", getActivity()).getId()));
-            c.moveToFirst();
-            while(!c.isAfterLast()){
-                Cursor cursor = gesMobDB.obtenerUsuario(c.getInt(0));
-                cursor.moveToFirst();
-                Usuario u = new Usuario();
-                u.setId(cursor.getString(0));
-                u.setNombre(cursor.getString(1));
-                u.setEmail(cursor.getString(2));
-                u.setTipo(cursor.getString(3));
-                alumnos.add(u);
-                c.moveToNext();
-            }
 
-            gesMobDB.close();
 
-            ListView listView = root.findViewById(R.id.alumnos);
-            alumnoArray = new AlumnoArray(getActivity(), R.layout.alumno_view, alumnos);
-            listView.setAdapter(alumnoArray);
+
+
 
         }
-
-
-
-
 
         return root;
     }

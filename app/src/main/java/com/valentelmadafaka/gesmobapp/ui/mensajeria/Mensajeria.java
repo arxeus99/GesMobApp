@@ -1,10 +1,10 @@
-package com.valentelmadafaka.gesmobapp.ui;
+package com.valentelmadafaka.gesmobapp.ui.mensajeria;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,8 +15,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.valentelmadafaka.gesmobapp.R;
+import com.valentelmadafaka.gesmobapp.model.Chat;
 import com.valentelmadafaka.gesmobapp.model.Mensaje;
 import com.valentelmadafaka.gesmobapp.model.MensajeArray;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
@@ -29,17 +31,24 @@ public class Mensajeria extends AppCompatActivity {
     ArrayList<Mensaje> mensajes = new ArrayList<>();
     MensajeArray mensajeArray;
     ListView listView;
+    Usuario usuario;
+    Chat chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mensajeria);
+        usuario = (Usuario)getIntent().getSerializableExtra("Usuario");
+        chat = (Chat)getIntent().getSerializableExtra("Chat");
+        if(chat != null){
+            chat.setNotificacion(false);
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mensajeText = findViewById(R.id.mensaje);
 
         bd = new GesMobDB(this);
         bd.open();
-        Cursor c = bd.obtenerMensajes();
+        Cursor c = bd.obtenerMensajesDeChat(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", this).getId()), Integer.parseInt(usuario.getId()));
         c.moveToFirst();
         while(!c.isAfterLast()){
             Mensaje mensaje = new Mensaje();
@@ -57,14 +66,14 @@ public class Mensajeria extends AppCompatActivity {
         }
 
         for(Mensaje m : mensajes){
-            if(!m.getIdEmisor().equals(PreferencesHelper.recuperarUsuari("User", this).getId())){
+            if(m.getIdReceptor().equals(PreferencesHelper.recuperarUsuari("User", this).getId()) && !m.isLeido()){
                m.setLeido(true);
                bd.leerMensaje(Integer.parseInt(m.getId()));
             }
         }
         bd.close();
 
-        mensajeArray = new MensajeArray(this, R.layout.mensaje_enviado, mensajes);
+        mensajeArray = new MensajeArray(this, R.layout.mensaje_enviado, mensajes, usuario);
         listView = findViewById(R.id.messages_view);
         listView.setAdapter(mensajeArray);
         listView.setSelection(mensajeArray.getCount()-1);
@@ -82,12 +91,10 @@ public class Mensajeria extends AppCompatActivity {
         if(!mensajeText.getText().toString().isEmpty()){
             bd = new GesMobDB(this);
             bd.open();
-            Cursor c = bd.obtenerAlumno(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", this).getId()));
-            c.moveToFirst();
             Mensaje mensaje = new Mensaje();
             mensaje.setId((bd.obtenerNumeroMensajes()+1)+"");
             mensaje.setIdEmisor(PreferencesHelper.recuperarUsuari("User", this).getId());
-            mensaje.setIdReceptor(c.getString(3));
+            mensaje.setIdReceptor(usuario.getId());
             mensaje.setContenido(mensajeText.getText().toString());
             mensaje.setLeido(false);
             //Toast.makeText(this, mensaje.getContenido(), Toast.LENGTH_SHORT).show();
@@ -109,5 +116,12 @@ public class Mensajeria extends AppCompatActivity {
 
             listView.setSelection(mensajeArray.getCount()-1);
         }
+    }
+
+    public void finish(){
+        Intent data = new Intent();
+        data.putExtra("Chat", chat);
+        setResult(RESULT_OK, data);
+        super.finish();
     }
 }

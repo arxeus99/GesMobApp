@@ -280,6 +280,11 @@ public class GesMobDB {
         return cursor;
     }
 
+    public Cursor obtenerSemana(long id){
+        Cursor cursor = bd.query(true, TAB_SEMANAS, new String[]{SEMANA_ID, SEMANA_INICIO, SEMANA_FINAL, SEMANA_HORAS}, SEMANA_ID+ " = "+id, null, null, null, null, null);
+        return cursor;
+    }
+
     public void finalizarTarea(long id){
         bd.execSQL("UPDATE "+TAB_TAREA+" SET "+TAREA_REALIZADA+" = 1 WHERE "+TAREA_ID+" = "+id);
     }
@@ -290,8 +295,23 @@ public class GesMobDB {
         return c.getInt(0);
     }
 
-    public Cursor obtenerMensajes(){
-        Cursor c = bd.query(true, TAB_MENSAJE, new String[]{MENSAJE_ID, MENSAJE_CONTENIDO, MENSAJE_ID_EMISOR, MENSAJE_ID_RECEPTOR, MENSAJE_LEIDO}, null, null, null, null, null, null);
+    public Cursor obtenerMensajesRecibidos(long id){
+        Cursor c = bd.query(true, TAB_MENSAJE, new String[]{MENSAJE_ID, MENSAJE_CONTENIDO, MENSAJE_ID_EMISOR, MENSAJE_ID_RECEPTOR, MENSAJE_LEIDO}, MENSAJE_ID_RECEPTOR+" = "+id, null, null, null, null, null);
+        return c;
+    }
+
+    public Cursor obtenerMensajes(long id){
+        Cursor c = bd.query(true, TAB_MENSAJE, new String[]{MENSAJE_ID, MENSAJE_CONTENIDO, MENSAJE_ID_EMISOR, MENSAJE_ID_RECEPTOR, MENSAJE_LEIDO}, MENSAJE_ID_RECEPTOR+" = "+id+" OR "+ MENSAJE_ID_EMISOR+" = "+id, null, null, null, null, null);
+        return c;
+    }
+
+    public Cursor obtenerMensajesDeChat(long id1, long id2){
+        Cursor c = bd.query(true, TAB_MENSAJE, new String[]{MENSAJE_ID, MENSAJE_CONTENIDO, MENSAJE_ID_EMISOR, MENSAJE_ID_RECEPTOR, MENSAJE_LEIDO}, "("+MENSAJE_ID_RECEPTOR+" = "+id1+" AND "+MENSAJE_ID_EMISOR+" = "+id2+") OR ("+MENSAJE_ID_RECEPTOR+" = "+id2+" AND "+MENSAJE_ID_EMISOR+" = "+id1+")", null, null, null, null, null);
+        return c;
+    }
+
+    public Cursor obtenerUltimoMensaje(long id1, long id2){
+        Cursor c = bd.query(true, TAB_MENSAJE, new String[]{MENSAJE_CONTENIDO, MENSAJE_LEIDO, MENSAJE_ID_EMISOR}, "("+MENSAJE_ID_RECEPTOR+" = "+id1+" AND "+MENSAJE_ID_EMISOR+" = "+id2+") OR ("+MENSAJE_ID_RECEPTOR+" = "+id2+" AND "+MENSAJE_ID_EMISOR+" = "+id1+")", null, null, null, MENSAJE_ID+" DESC", "1");
         return c;
     }
 

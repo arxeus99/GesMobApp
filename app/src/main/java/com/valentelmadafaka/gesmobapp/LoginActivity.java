@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText usuario, contraseña;
     TextView respuesta;
+    Boolean pulsado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class LoginActivity extends AppCompatActivity {
                 usuario.setEmail(c.getString(2));
                 usuario.setTipo(c.getString(3));
                 PreferencesHelper.desaUsuari("User", usuario, this);
-                startActivity(new Intent(this, MainActivity.class));
+                pulsado = true;
+                finish();
             }
             bd.close();
         }else{
@@ -56,5 +58,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         this.finishAffinity();
+    }
+
+    public void finish(){
+        if(pulsado){
+            Intent data = new Intent();
+            data.putExtra("asd", "asd");
+            setResult(RESULT_OK, data);
+        }
+        super.finish();
     }
 }
