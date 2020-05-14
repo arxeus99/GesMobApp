@@ -26,6 +26,7 @@ import com.valentelmadafaka.gesmobapp.ui.home.HomeViewModel;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaDetail;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaForm;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
+import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
 import org.w3c.dom.Text;
 
@@ -88,7 +89,7 @@ public class PlaceholderFragment extends Fragment {
 
                 gesMobDB = new GesMobDB(getActivity());
                 gesMobDB.open();
-                Cursor c = gesMobDB.obtenerTareas();
+                Cursor c = gesMobDB.obtenerTareas(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", getActivity()).getId()));
                 c.moveToFirst();
                 tareas.clear();
                 while(!c.isAfterLast()){

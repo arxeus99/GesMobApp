@@ -206,8 +206,8 @@ public class GesMobDB {
         return bd.insert(TAB_TAREA, null, contentValues);
     }
 
-    public Cursor obtenerTareas(){
-        Cursor cursor = bd.query(true, TAB_TAREA, new String[]{TAREA_ID, TAREA_NOMBRE, TAREA_DESCRIPCION, TAREA_FECHA, TAREA_HORAS, TAREA_REALIZADA, TAREA_ID_ALUMNO, TAREA_ID_PROFESOR},null, null, null, null, null, null);
+    public Cursor obtenerTareas(long id){
+        Cursor cursor = bd.query(true, TAB_TAREA, new String[]{TAREA_ID, TAREA_NOMBRE, TAREA_DESCRIPCION, TAREA_FECHA, TAREA_HORAS, TAREA_REALIZADA, TAREA_ID_ALUMNO, TAREA_ID_PROFESOR},TAREA_ID_ALUMNO+" = "+id, null, null, null, null, null);
         return cursor;
     }
 

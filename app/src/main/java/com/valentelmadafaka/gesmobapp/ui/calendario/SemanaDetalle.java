@@ -19,6 +19,7 @@ import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.TareaArray;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaDetail;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
+import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,12 +50,11 @@ public class SemanaDetalle extends AppCompatActivity {
         titulo.setText("Semana "+semana.getId());
         fechas.setText(semana.getInicio()+" - "+semana.getFin());
 
-        Date fechaDeHoy = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         gesMobDB = new GesMobDB(this);
         gesMobDB.open();
-        Cursor c = gesMobDB.obtenerTareas();
+        Cursor c = gesMobDB.obtenerTareas(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", this).getId()));
         c.moveToFirst();
         tareas.clear();
         while(!c.isAfterLast()){

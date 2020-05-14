@@ -44,11 +44,13 @@ public class HomeFragment extends Fragment {
     ArrayList<Tarea> tareas = new ArrayList<>();
     TareaArray tareaArray;
     AlumnoArray alumnoArray;
+    Usuario usuario;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        if(PreferencesHelper.recuperarUsuari("User", getActivity()) != null){
-            if(PreferencesHelper.recuperarUsuari("User", getActivity()).getTipo().equals("alumno")){
+        usuario = PreferencesHelper.recuperarUsuari("User", getActivity());
+        if(usuario != null){
+            if(usuario.getTipo().equals("alumno")){
                 root = inflater.inflate(R.layout.fragment_home_alumno, container, false);
                 homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
@@ -56,6 +58,8 @@ public class HomeFragment extends Fragment {
                 final TextView fechas = root.findViewById(R.id.fechas);
                 final TextView info = root.findViewById(R.id.info);
                 GesMobDB gesMobDB;
+
+                boolean fueraDeFechas = true;
 
 
 
@@ -66,12 +70,13 @@ public class HomeFragment extends Fragment {
                 for(Semana s : homeViewModel.getSemanas()){
                     try {
                         if(saberFecha(dateFormat.parse(s.getInicio()), dateFormat.parse(s.getFin()), fechaDeHoy)){
+                            fueraDeFechas = false;
                             textView.setText("Semana "+s.getId());
                             fechas.setText(s.getInicio()+" - "+s.getFin());
 
                             gesMobDB = new GesMobDB(getActivity());
                             gesMobDB.open();
-                            Cursor c = gesMobDB.obtenerTareas();
+                            Cursor c = gesMobDB.obtenerTareas(Integer.parseInt(usuario.getId()));
                             c.moveToFirst();
                             tareas.clear();
                             while(!c.isAfterLast()){
@@ -141,13 +146,16 @@ public class HomeFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
+                if(fueraDeFechas){
+                    root = inflater.inflate(R.layout.fragment_home_fuera_de_fechas, container, false);
+                }
             }else{
                 root = inflater.inflate(R.layout.fragment_home_profesor, container, false);
 
                 final ArrayList<Usuario> alumnos = new ArrayList<>();
                 gesMobDB = new GesMobDB(getActivity());
                 gesMobDB.open();
-                Cursor c = gesMobDB.obtenerAlumnosDeProfeosor(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", getActivity()).getId()));
+                Cursor c = gesMobDB.obtenerAlumnosDeProfeosor(Integer.parseInt(usuario.getId()));
                 c.moveToFirst();
                 while(!c.isAfterLast()){
                     Cursor cursor = gesMobDB.obtenerUsuario(c.getInt(0));
