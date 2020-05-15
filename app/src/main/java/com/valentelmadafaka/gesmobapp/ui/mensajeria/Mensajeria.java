@@ -120,6 +120,12 @@ public class Mensajeria extends AppCompatActivity {
 
     public void finish(){
         if(PreferencesHelper.recuperarUsuari("User", this).getTipo().equals("profesor")){
+            bd = new GesMobDB(this);
+            bd.open();
+            Cursor c = bd.obtenerUltimoMensaje(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", this).getId()), Integer.parseInt(usuario.getId()));
+            c.moveToFirst();
+            chat.setUltimoMensaje(c.getString(0));
+            bd.close();
             Intent data = new Intent();
             data.putExtra("Chat", chat);
             setResult(RESULT_OK, data);
