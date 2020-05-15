@@ -31,15 +31,15 @@ public class PerfilAlumno extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_alumno);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Usuario usuario = (Usuario)getIntent().getSerializableExtra("alumno");
+        final Usuario alumno = (Usuario)getIntent().getSerializableExtra("alumno");
         TextView nombre = findViewById(R.id.nombreAlumno);
         TextView correo = findViewById(R.id.correoAlumno);
         TextView empresa = findViewById(R.id.empresaAlumno);
-        nombre.setText(usuario.getNombre());
-        correo.setText(usuario.getEmail());
+        nombre.setText(alumno.getNombre());
+        correo.setText(alumno.getEmail());
         GesMobDB gesMobDB = new GesMobDB(this);
         gesMobDB.open();
-        Cursor c = gesMobDB.obtenerAlumno(Integer.parseInt(usuario.getId()));
+        Cursor c = gesMobDB.obtenerAlumno(Integer.parseInt(alumno.getId()));
         c.moveToFirst();
         String info = c.getString(4);
         String[] semanasInfo = info.split(",");
@@ -63,10 +63,11 @@ public class PerfilAlumno extends AppCompatActivity {
                 Semana semana = (Semana)parent.getItemAtPosition(position);
                 Intent i = new Intent(PerfilAlumno.this, SemanaDetalle.class);
                 i.putExtra("semana", semana);
+                i.putExtra("alumno", alumno);
                 startActivity(i);
             }
         });
-        c = gesMobDB.obtenerAlumno(Integer.parseInt(usuario.getId()));
+        c = gesMobDB.obtenerAlumno(Integer.parseInt(alumno.getId()));
         c.moveToFirst();
         int idEmpresa = c.getInt(1);
         c = gesMobDB.obtenerEmpresa(idEmpresa);

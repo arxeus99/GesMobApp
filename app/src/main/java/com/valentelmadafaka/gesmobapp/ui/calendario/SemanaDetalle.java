@@ -17,6 +17,7 @@ import com.valentelmadafaka.gesmobapp.R;
 import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.TareaArray;
+import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaDetail;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
@@ -31,6 +32,7 @@ import static com.valentelmadafaka.gesmobapp.ui.home.page.PlaceholderFragment.sa
 public class SemanaDetalle extends AppCompatActivity {
 
     Semana semana;
+    Usuario alumno;
     TextView titulo, fechas, info;
     GesMobDB gesMobDB;
     ArrayList<Tarea> tareas = new ArrayList<>();
@@ -43,6 +45,7 @@ public class SemanaDetalle extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         semana = (Semana)getIntent().getSerializableExtra("semana");
+        alumno = (Usuario)getIntent().getSerializableExtra("alumno");
         titulo = findViewById(R.id.semana);
         fechas = findViewById(R.id.fechas);
         info = findViewById(R.id.info);
@@ -54,7 +57,7 @@ public class SemanaDetalle extends AppCompatActivity {
 
         gesMobDB = new GesMobDB(this);
         gesMobDB.open();
-        Cursor c = gesMobDB.obtenerTareas(Integer.parseInt(PreferencesHelper.recuperarUsuari("User", this).getId()));
+        Cursor c = gesMobDB.obtenerTareas(Integer.parseInt(alumno.getId()));
         c.moveToFirst();
         tareas.clear();
         while(!c.isAfterLast()){

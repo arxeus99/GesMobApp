@@ -18,6 +18,7 @@ import android.widget.ListView;
 import com.valentelmadafaka.gesmobapp.R;
 import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.SemanaArray;
+import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
 public class CalendarioFragment extends Fragment {
 
@@ -52,6 +53,7 @@ public class CalendarioFragment extends Fragment {
                 Semana semana = (Semana)parent.getItemAtPosition(position);
                 Intent i = new Intent(getActivity(), SemanaDetalle.class);
                 i.putExtra("semana", semana);
+                i.putExtra("alumno", PreferencesHelper.recuperarUsuari("User", getActivity()));
                 startActivity(i);
             }
         });
