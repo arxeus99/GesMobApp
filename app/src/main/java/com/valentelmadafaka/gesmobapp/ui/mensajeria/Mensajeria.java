@@ -119,9 +119,19 @@ public class Mensajeria extends AppCompatActivity {
     }
 
     public void finish(){
-        Intent data = new Intent();
-        data.putExtra("Chat", chat);
-        setResult(RESULT_OK, data);
+        if(PreferencesHelper.recuperarUsuari("User", this).getTipo().equals("profesor")){
+            Intent data = new Intent();
+            data.putExtra("Chat", chat);
+            setResult(RESULT_OK, data);
+        }else{
+            Intent data = new Intent();
+            ArrayList<Chat> chats = new ArrayList<>();
+            chat = new Chat();
+            chat.setNotificacion(false);
+            data.putExtra("Chats", chats);
+            setResult(RESULT_OK, data);
+        }
+
         super.finish();
     }
 }

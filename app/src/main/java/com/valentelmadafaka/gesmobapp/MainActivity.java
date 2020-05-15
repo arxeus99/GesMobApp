@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                     profesor.setTipo(c.getString(3));
                     intent.putExtra("Usuario", profesor);
                     gesMobDB.close();
-                    startActivity(intent);
+                    startActivityForResult(intent, 10);
                 }else
                     startActivityForResult(new Intent(MainActivity.this, Chats.class), 10);
 
