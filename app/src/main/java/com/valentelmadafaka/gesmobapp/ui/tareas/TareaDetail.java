@@ -50,6 +50,10 @@ public class TareaDetail extends AppCompatActivity {
         duracion.setText(tarea.getHoras()+"h");
         db = new GesMobDB(this);
 
+        if(tarea.isRealizada()){
+            Button finalizar = findViewById(R.id.finalizada);
+            finalizar.setVisibility(View.INVISIBLE);
+        }
 
         final ArrayList<Observacion> observaciones = new ArrayList<>();
 
@@ -89,16 +93,19 @@ public class TareaDetail extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
                                         // get user input and set it to result
                                         // edit text
-                                        Observacion observacion = new Observacion();
-                                        db.open();
-                                        observacion.setId((db.obetenerNumeroObservaciones()+1)+"");
-                                        observacion.setAutorId(PreferencesHelper.recuperarUsuari("User", TareaDetail.this).getId());
-                                        observacion.setTareaId(tarea.getId());
-                                        observacion.setContenido(userInput.getText().toString());
-                                        db.insertaObservacion(observacion);
-                                        db.close();
-                                        observaciones.add(observacion);
-                                        observacionArray.notifyDataSetChanged();
+                                        if(!userInput.getText().toString().isEmpty()){
+                                            Observacion observacion = new Observacion();
+                                            db.open();
+                                            observacion.setId((db.obetenerNumeroObservaciones()+1)+"");
+                                            observacion.setAutorId(PreferencesHelper.recuperarUsuari("User", TareaDetail.this).getId());
+                                            observacion.setTareaId(tarea.getId());
+                                            observacion.setContenido(userInput.getText().toString());
+                                            db.insertaObservacion(observacion);
+                                            db.close();
+                                            observaciones.add(observacion);
+                                            observacionArray.notifyDataSetChanged();
+                                        }
+
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -127,12 +134,24 @@ public class TareaDetail extends AppCompatActivity {
     }
 
     public void finalizarVoid(View view){
-        tarea.setRealizada(true);
-        db.open();
-        db.finalizarTarea(Integer.parseInt(tarea.getId()));
-        db.close();
-        cambiada = true;
-        finish();
+        new android.app.AlertDialog.Builder(TareaDetail.this)
+                .setTitle("Atención")
+                .setMessage("¿Seguro que quiere finalizar esta tarea?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tarea.setRealizada(true);
+                        db.open();
+                        db.finalizarTarea(Integer.parseInt(tarea.getId()));
+                        db.close();
+                        cambiada = true;
+                        finish();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setNegativeButton(android.R.string.no, null)
+                .show();
+
     }
 
 

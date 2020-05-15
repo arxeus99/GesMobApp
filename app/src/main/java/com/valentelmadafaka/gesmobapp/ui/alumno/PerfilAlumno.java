@@ -11,12 +11,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.valentelmadafaka.gesmobapp.R;
 import com.valentelmadafaka.gesmobapp.model.Semana;
 import com.valentelmadafaka.gesmobapp.model.SemanaArray;
+import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.ui.calendario.SemanaDetalle;
+import com.valentelmadafaka.gesmobapp.ui.mensajeria.Mensajeria;
+import com.valentelmadafaka.gesmobapp.ui.tareas.TareaForm;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
@@ -25,13 +29,14 @@ import java.util.ArrayList;
 public class PerfilAlumno extends AppCompatActivity {
 
     ArrayList<Semana> semanas = new ArrayList<>();
+    Usuario alumno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_alumno);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final Usuario alumno = (Usuario)getIntent().getSerializableExtra("alumno");
+        alumno = (Usuario)getIntent().getSerializableExtra("alumno");
         TextView nombre = findViewById(R.id.nombreAlumno);
         TextView correo = findViewById(R.id.correoAlumno);
         TextView empresa = findViewById(R.id.empresaAlumno);
@@ -84,5 +89,31 @@ public class PerfilAlumno extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void tarea(View view) {
+        Intent intent = new Intent(this, TareaForm.class);
+        intent.putExtra("destinatarios", false);
+        intent.putExtra("alumno", alumno);
+        startActivityForResult(intent, 11);
+    }
+
+    public void mensaje(View view) {
+        Intent intent = new Intent(this, Mensajeria.class);
+        intent.putExtra("Usuario", alumno);
+        startActivity(intent);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == 11){
+            Tarea t = (Tarea) data.getExtras().get("tarea");
+            GesMobDB gesMobDB = new GesMobDB(this);
+            gesMobDB.open();
+            if (gesMobDB.insertaTarea(t) == -1) {
+                Toast.makeText(this, "Error a l'afegir", Toast.LENGTH_SHORT).show();
+            }
+            gesMobDB.close();
+        }
     }
 }

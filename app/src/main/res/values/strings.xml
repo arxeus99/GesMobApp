@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">GesMobApp</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">GesMobApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">GesMobApp</string>
@@ -13,6 +13,7 @@
     <string name="menu_empresa">Perfil Empresa</string>
     <string name="menu_alumno">Perfil Alumno</string>
     <string name="menu_ajustes">Ajustes</string>
+    <string name="menu_calendario">Calendario</string>
 
     <string name="home_second">Home Second</string>
 

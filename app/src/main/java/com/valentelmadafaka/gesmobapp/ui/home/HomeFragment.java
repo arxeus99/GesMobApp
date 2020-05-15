@@ -197,12 +197,6 @@ public class HomeFragment extends Fragment {
                 });
 
             }
-
-
-
-
-
-
         }
 
         return root;
@@ -213,15 +207,15 @@ public class HomeFragment extends Fragment {
         if (requestCode == 11) {
             if(resultCode == RESULT_OK) {
                 if (data.hasExtra("tarea")) {
-                Tarea t = (Tarea) data.getExtras().get("tarea");
-                gesMobDB = new GesMobDB(getActivity());
-                gesMobDB.open();
-                if (gesMobDB.insertaTarea(t) == -1) {
-                    Toast.makeText(getActivity(), "Error a l'afegir", Toast.LENGTH_SHORT).show();
-                }
-                gesMobDB.close();
-                tareas.add(t);
-                tareaArray.notifyDataSetChanged();
+                    Tarea t = (Tarea) data.getExtras().get("tarea");
+                    gesMobDB = new GesMobDB(getActivity());
+                    gesMobDB.open();
+                    if (gesMobDB.insertaTarea(t) == -1) {
+                        Toast.makeText(getActivity(), "Error a l'afegir", Toast.LENGTH_SHORT).show();
+                    }
+                    gesMobDB.close();
+                    tareas.add(t);
+                    tareaArray.notifyDataSetChanged();
                 }
             }else if(resultCode == 11){
                 ArrayList<Tarea> tareasRecibidas = (ArrayList<Tarea>)data.getExtras().get("tareas");

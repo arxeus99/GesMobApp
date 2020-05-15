@@ -5,16 +5,20 @@
     <application
         android:name=".GesMobApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icono"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icono"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.mensajeria.Chats"></activity>
-        <activity android:name=".ui.alumno.PerfilAlumno" />
-        <activity android:name=".ui.calendario.SemanaDetalle" />
+        <activity android:name=".ui.mensajeria.Chats"
+            android:label="Chats"/>
+        <activity android:name=".ui.alumno.PerfilAlumno"
+            android:label="Perfil de Alumno"/>
+        <activity android:name=".ui.calendario.SemanaDetalle"
+            android:label="Detalle Semana"/>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ui.tareas.TareaDetail" />
+        <activity android:name=".ui.tareas.TareaDetail"
+            android:label="Tarea en Detalle"/>
         <activity
             android:name=".ui.tareas.TareaForm"
             android:label="Crear nueva tarea" />

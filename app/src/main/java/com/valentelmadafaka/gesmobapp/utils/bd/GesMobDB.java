@@ -168,7 +168,7 @@ public class GesMobDB {
         return bd.insert(TAB_ALUMNO, null, contentValues);
     }
 
-    public Cursor obtenerAlumno(long id){
+    public Cursor  obtenerAlumno(long id){
         Cursor cursor = bd.query(true, TAB_ALUMNO, new String[]{ALUMNO_ID, ALUMNO_ID_EMPRESA, ALUMNO_DIRECCION, ALUMNO_ID_PROFESOR, ALUMNO_SEMANAS}, ALUMNO_ID + " = " + id, null, null, null, null, null);
         return cursor;
     }
