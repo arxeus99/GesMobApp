@@ -81,6 +81,28 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
             </LinearLayout>
 
+
+            <LinearLayout
+                android:id="@+id/destinatarios"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Destinatarios"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+                <MultiAutoCompleteTextView
+                    android:id="@+id/destinatariosText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="0"/>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/crearButton"
                 android:layout_width="wrap_content"

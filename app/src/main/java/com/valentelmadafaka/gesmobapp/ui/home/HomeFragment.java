@@ -138,7 +138,9 @@ public class HomeFragment extends Fragment {
                             crearTarea.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    startActivityForResult(new Intent(getActivity(), TareaForm.class), 11);
+                                    Intent intent = new Intent(getActivity(), TareaForm.class);
+                                    intent.putExtra("destinatarios", false);
+                                    startActivityForResult(intent, 11);
                                 }
                             });
                         }
@@ -184,6 +186,16 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+                final Button crearTarea = root.findViewById(R.id.crearTareaButton);
+                crearTarea.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), TareaForm.class);
+                        intent.putExtra("destinatarios", true);
+                        startActivityForResult(intent, 11);
+                    }
+                });
+
             }
 
 
@@ -198,8 +210,9 @@ public class HomeFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 11) {
-            if (data.hasExtra("tarea")) {
+        if (requestCode == 11) {
+            if(resultCode == RESULT_OK) {
+                if (data.hasExtra("tarea")) {
                 Tarea t = (Tarea) data.getExtras().get("tarea");
                 gesMobDB = new GesMobDB(getActivity());
                 gesMobDB.open();
@@ -209,6 +222,17 @@ public class HomeFragment extends Fragment {
                 gesMobDB.close();
                 tareas.add(t);
                 tareaArray.notifyDataSetChanged();
+                }
+            }else if(resultCode == 11){
+                ArrayList<Tarea> tareasRecibidas = (ArrayList<Tarea>)data.getExtras().get("tareas");
+                gesMobDB = new GesMobDB(getActivity());
+                gesMobDB.open();
+                for(Tarea t : tareasRecibidas){
+                    if(gesMobDB.insertaTarea(t) == -1){
+                        Toast.makeText(getActivity(), "Error a l'afegir", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                gesMobDB.close();
 
             }
         } else if (resultCode == RESULT_OK && requestCode == 10) {
