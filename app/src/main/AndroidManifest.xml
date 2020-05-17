@@ -10,15 +10,20 @@
         android:roundIcon="@drawable/icono"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.mensajeria.Chats"
-            android:label="Chats"/>
-        <activity android:name=".ui.alumno.PerfilAlumno"
-            android:label="Perfil de Alumno"/>
-        <activity android:name=".ui.calendario.SemanaDetalle"
-            android:label="Detalle Semana"/>
+        <activity android:name=".ui.empresa.EmpresaDetail"></activity>
+        <activity
+            android:name=".ui.mensajeria.Chats"
+            android:label="Chats" />
+        <activity
+            android:name=".ui.alumno.PerfilAlumno"
+            android:label="Perfil de Alumno" />
+        <activity
+            android:name=".ui.calendario.SemanaDetalle"
+            android:label="Detalle Semana" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ui.tareas.TareaDetail"
-            android:label="Tarea en Detalle"/>
+        <activity
+            android:name=".ui.tareas.TareaDetail"
+            android:label="Tarea en Detalle" />
         <activity
             android:name=".ui.tareas.TareaForm"
             android:label="Crear nueva tarea" />

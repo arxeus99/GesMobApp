@@ -43,157 +43,124 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        try {
-//            Mensaje mensaje = JSONHelper.obtenerMensaje("{\"id\": 1, \"emisor\":2, \"receptor\":1, \"contenido\": \"Hola buenas probando\", \"leido\":1}");
-//            Mensaje mensaje2 = JSONHelper.obtenerMensaje("{\"id\": 2, \"emisor\":1, \"receptor\":2, \"contenido\": \"Hola buenas probando\", \"leido\":1}");
-//            Mensaje mensaje3 = JSONHelper.obtenerMensaje("{\"id\": 3, \"emisor\":2, \"receptor\":1, \"contenido\": \"Hola buenas probando\", \"leido\":1}");
-//            Mensaje mensaje4 = JSONHelper.obtenerMensaje("{\"id\": 4, \"emisor\":1, \"receptor\":2, \"contenido\": \"Hola buenas probando\", \"leido\":0}");
-//            Usuario usuario = JSONHelper.obtenerUsuario("{\"id\":1,\"nombre\":\"Yoshi\",\"email\":\"ydensham0@artisteer.com\",\"tipo\":\"alumno\"}");
-//            Usuario usuario2 = JSONHelper.obtenerUsuario("{\"id\":3,\"nombre\":\"Valentin\",\"email\":\"arxeus99@gmail.com\",\"tipo\":\"alumno\"}");
-//            Alumno alumno = JSONHelper.obtenerAlumno("{\n" +
-//                    "  \"id\": 1,\n" +
-//                    "  \"direccion\": \"12025 Stoughton Hill\",\n" +
-//                    "  \"idProfesor\": 2,\n" +
-//                    "  \"idEmpresa\": 1,\n" +
-//                    "  \"semanas\": \"1,2,3,4,5\"\n" +
-//                    "}");
-//            Alumno alumno2 = JSONHelper.obtenerAlumno("{\n" +
-//                    "  \"id\": 3,\n" +
-//                    "  \"direccion\": \"c/Ramon Desbrull, 50, Inca\",\n" +
-//                    "  \"idProfesor\": 2,\n" +
-//                    "  \"idEmpresa\": 1,\n" +
-//                    "  \"semanas\": \"3,4,5,6\"\n" +
-//                    "}");
-//
-//            Empresa empresa = JSONHelper.obtenerEmpresa("{\n" +
-//                    "  \"id\": 1,\n" +
-//                    "  \"nombre\": \"Shields, Wisozk and Doyle\",\n" +
-//                    "  \"email\": \"ggott0@washington.edu\",\n" +
-//                    "  \"direccion\": \"06981 Michigan Park\",\n" +
-//                    "  \"web\": \"Kurdish.com\",\n" +
-//                    "  \"telefono\": \"686-901-2503\"\n" +
-//                    "}");
-//            Usuario profesor = JSONHelper.obtenerUsuario("{\"id\":2,\"nombre\":\"Benedict\",\"email\":\"bspeek1@odnoklassniki.ru\",\"tipo\":\"profesor\"}");
-//
-//            Tarea t1 = JSONHelper.obtenerTarea("{\n" +
-//                    "  \"id\": 1,\n" +
-//                    "  \"nombre\": \"Holdlamis\",\n" +
-//                    "  \"descripcion\": \"Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum.\",\n" +
-//                    "  \"fecha\": \"09/05/2020\",\n" +
-//                    "  \"horas\": 53,\n" +
-//                    "  \"realizada\": 0,\n" +
-//                    "  \"idAlumno\": 1,\n" +
-//                    "  \"idProfesor\": 2\n" +
-//                    "}");
-//            Tarea t2 = JSONHelper.obtenerTarea("{\n" +
-//                    "  \"id\": 2,\n" +
-//                    "  \"nombre\": \"Opela\",\n" +
-//                    "  \"descripcion\": \"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.\",\n" +
-//                    "  \"fecha\": \"22/05/2020\",\n" +
-//                    "  \"horas\": 27,\n" +
-//                    "  \"realizada\": 1,\n" +
-//                    "  \"idAlumno\": 1,\n" +
-//                    "  \"idProfesor\": 2\n" +
-//                    "}");
-//            Tarea t3 = JSONHelper.obtenerTarea("{\n" +
-//                    "  \"id\": 3,\n" +
-//                    "  \"nombre\": \"Sub-Ex\",\n" +
-//                    "  \"descripcion\": \"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl.\",\n" +
-//                    "  \"fecha\": \"15/05/2020\",\n" +
-//                    "  \"horas\": 65,\n" +
-//                    "  \"realizada\": 1,\n" +
-//                    "  \"idAlumno\": 1,\n" +
-//                    "  \"idProfesor\": 2\n" +
-//                    "}");
-//            Tarea t4 = JSONHelper.obtenerTarea("{\n" +
-//                    "  \"id\": 4,\n" +
-//                    "  \"nombre\": \"Vagram\",\n" +
-//                    "  \"descripcion\": \"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\",\n" +
-//                    "  \"fecha\": \"29/05/2020\",\n" +
-//                    "  \"horas\": 78,\n" +
-//                    "  \"realizada\": 0,\n" +
-//                    "  \"idAlumno\": 1,\n" +
-//                    "  \"idProfesor\": 2\n" +
-//                    "}");
-//
-//            Semana s1 = JSONHelper.obtenerSemana("{\"id\":1,\"inicio\":\"04/05/2020\",\"fin\":\"10/05/2020\",\"horas\":17}");
-//            Semana s2 = JSONHelper.obtenerSemana("{\"id\":2,\"inicio\":\"11/05/2020\",\"fin\":\"17/05/2020\",\"horas\":22}");
-//            Semana s3 = JSONHelper.obtenerSemana("{\"id\":3,\"inicio\":\"18/05/2020\",\"fin\":\"24/05/2020\",\"horas\":15}");
-//            Semana s4 = JSONHelper.obtenerSemana("{\"id\":4,\"inicio\":\"25/05/2020\",\"fin\":\"31/05/2020\",\"horas\":21}");
-//            Semana s5 = JSONHelper.obtenerSemana("{\"id\":5,\"inicio\":\"01/06/2020\",\"fin\":\"07/06/2020\",\"horas\":23}");
-//            Semana s6 = JSONHelper.obtenerSemana("{\"id\":6,\"inicio\":\"08/06/2020\",\"fin\":\"14/06/2020\",\"horas\":35}");
-//
-//            GesMobDB db = new GesMobDB(this);
-//            db.open();
-//            if(db.insertaEmpresa(empresa) == -1){
-//                Toast.makeText(this, "Error a l’afegir empresa",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//            if(db.insertaAlumno(alumno) == -1 ){
-//                Toast.makeText(this, "Error a l’afegir alumne",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaAlumno(alumno2) == -1){
-//                Toast.makeText(this, "Error a l’afegir alumne 2",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//            if(db.insertaUsuario(profesor) == -1){
-//                Toast.makeText(this, "Error a l’afegir professor",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaUsuario(usuario) == -1){
-//                Toast.makeText(this, "Error a l’afegir usuari",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaUsuario(usuario2) == -1){
-//                Toast.makeText(this, "Error a l’afegir usuari 2",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaTarea(t1) == -1){
-//                Toast.makeText(this, "Error a l’afegir t1",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaTarea(t2) == -1){
-//                Toast.makeText(this, "Error a l’afegir t2",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaTarea(t3) == -1){
-//                Toast.makeText(this, "Error a l’afegir t3",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaTarea(t4) == -1){
-//                Toast.makeText(this, "Error a l’afegir t4",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaMensaje(mensaje) == -1){
-//                Toast.makeText(this, "Error al añadir mensaje 1",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaMensaje(mensaje2) == -1){
-//                Toast.makeText(this, "Error al añadir mensaje 2",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaMensaje(mensaje3) == -1){
-//                Toast.makeText(this, "Error al añadir mensaje 3",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaMensaje(mensaje4) == -1){
-//                Toast.makeText(this, "Error al añadir mensaje 4",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//            if(db.insertaSemana(s1) == -1){
-//                Toast.makeText(this, "Error al añadir setmana 1",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaSemana(s2) == -1){
-//                Toast.makeText(this, "Error al añadir setmana 2",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaSemana(s3) == -1){
-//                Toast.makeText(this, "Error al añadir setmana 3",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaSemana(s4) == -1){
-//                Toast.makeText(this, "Error al añadir setmana 4",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaSemana(s5) == -1){
-//                Toast.makeText(this, "Error al añadir setmana 5",
-//                        Toast.LENGTH_SHORT).show();
-//            }if(db.insertaSemana(s6) == -1){
-//                Toast.makeText(this, "Error al añadir setmana 5",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//
-//            db.close();
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        if(!PreferencesHelper.isBaseDeDatos(this)){
+            try {
+                Mensaje mensaje = JSONHelper.obtenerMensaje("{\"id\": 1, \"emisor\":2, \"receptor\":1, \"contenido\": \"Hola alumno 1!\", \"leido\":0}");
+                Mensaje mensaje2 = JSONHelper.obtenerMensaje("{\"id\": 2, \"emisor\":2, \"receptor\":3, \"contenido\": \"Hola alumno 3!\", \"leido\":0}");
+                Usuario usuario = JSONHelper.obtenerUsuario("{\"id\":1,\"nombre\":\"Alumno1\",\"email\":\"alumno1@paucasesnovescifp.cat\",\"tipo\":\"alumno\"}");
+                Usuario usuario2 = JSONHelper.obtenerUsuario("{\"id\":3,\"nombre\":\"Alumno2\",\"email\":\"alumnmo2@paucasesnovescifp.cat\",\"tipo\":\"alumno\"}");
+                Alumno alumno = JSONHelper.obtenerAlumno("{\n" +
+                        "  \"id\": 1,\n" +
+                        "  \"direccion\": \"c/Son Nadal, 63, Palma\",\n" +
+                        "  \"idProfesor\": 2,\n" +
+                        "  \"idEmpresa\": 1,\n" +
+                        "  \"semanas\": \"1,2,3,4,5\"\n" +
+                        "}");
+                Alumno alumno2 = JSONHelper.obtenerAlumno("{\n" +
+                        "  \"id\": 3,\n" +
+                        "  \"direccion\": \"c/Ramon Desbrull, 50, Inca\",\n" +
+                        "  \"idProfesor\": 2,\n" +
+                        "  \"idEmpresa\": 1,\n" +
+                        "  \"semanas\": \"3,4,5,6\"\n" +
+                        "}");
+
+                Empresa empresa = JSONHelper.obtenerEmpresa("{\n" +
+                        "  \"id\": 1,\n" +
+                        "  \"nombre\": \"Ajuntament de Palma\",\n" +
+                        "  \"email\": \"ajuntament@palma.cat\",\n" +
+                        "  \"direccion\": \"Plaça de Cort, 1, Palma\",\n" +
+                        "  \"web\": \"palma.cat\",\n" +
+                        "  \"telefono\": \"971 22 59 00\"\n" +
+                        "}");
+                Usuario profesor = JSONHelper.obtenerUsuario("{\"id\":2,\"nombre\":\"Profesor\",\"email\":\"profesor@paucasesnovescifp.cat\",\"tipo\":\"profesor\"}");
+
+                Tarea t1 = JSONHelper.obtenerTarea("{\n" +
+                        "  \"id\": 1,\n" +
+                        "  \"nombre\": \"Hacer Java\",\n" +
+                        "  \"descripcion\": \"Tienes que practicar la programación orientada a objetos en java haciendo programas.\",\n" +
+                        "  \"fecha\": \"09/05/2020\",\n" +
+                        "  \"horas\": 3,\n" +
+                        "  \"realizada\": 0,\n" +
+                        "  \"idAlumno\": 1,\n" +
+                        "  \"idProfesor\": 2\n" +
+                        "}");
+                Tarea t2 = JSONHelper.obtenerTarea("{\n" +
+                        "  \"id\": 2,\n" +
+                        "  \"nombre\": \"Practicar SQL\",\n" +
+                        "  \"descripcion\": \"Tienes que practicar selects y triggers en SQL en la base de datos que tengan en la empresa.\",\n" +
+                        "  \"fecha\": \"22/05/2020\",\n" +
+                        "  \"horas\": 4,\n" +
+                        "  \"realizada\": 1,\n" +
+                        "  \"idAlumno\": 3,\n" +
+                        "  \"idProfesor\": 2\n" +
+                        "}");
+
+                Semana s1 = JSONHelper.obtenerSemana("{\"id\":1,\"inicio\":\"04/05/2020\",\"fin\":\"10/05/2020\",\"horas\":17}");
+                Semana s2 = JSONHelper.obtenerSemana("{\"id\":2,\"inicio\":\"11/05/2020\",\"fin\":\"17/05/2020\",\"horas\":22}");
+                Semana s3 = JSONHelper.obtenerSemana("{\"id\":3,\"inicio\":\"18/05/2020\",\"fin\":\"24/05/2020\",\"horas\":15}");
+                Semana s4 = JSONHelper.obtenerSemana("{\"id\":4,\"inicio\":\"25/05/2020\",\"fin\":\"31/05/2020\",\"horas\":21}");
+                Semana s5 = JSONHelper.obtenerSemana("{\"id\":5,\"inicio\":\"01/06/2020\",\"fin\":\"07/06/2020\",\"horas\":23}");
+                Semana s6 = JSONHelper.obtenerSemana("{\"id\":6,\"inicio\":\"08/06/2020\",\"fin\":\"14/06/2020\",\"horas\":35}");
+
+                GesMobDB db = new GesMobDB(this);
+                db.open();
+                if(db.insertaEmpresa(empresa) == -1){
+                    Toast.makeText(this, "Error a l’afegir empresa",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaAlumno(alumno) == -1 ){
+                    Toast.makeText(this, "Error a l’afegir alumne",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaAlumno(alumno2) == -1){
+                    Toast.makeText(this, "Error a l’afegir alumne 2",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaUsuario(profesor) == -1){
+                    Toast.makeText(this, "Error a l’afegir professor",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaUsuario(usuario) == -1){
+                    Toast.makeText(this, "Error a l’afegir usuari",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaUsuario(usuario2) == -1){
+                    Toast.makeText(this, "Error a l’afegir usuari 2",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaTarea(t1) == -1){
+                    Toast.makeText(this, "Error a l’afegir t1",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaTarea(t2) == -1){
+                    Toast.makeText(this, "Error a l’afegir t2",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaMensaje(mensaje) == -1){
+                    Toast.makeText(this, "Error al añadir mensaje 1",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaMensaje(mensaje2) == -1){
+                    Toast.makeText(this, "Error al añadir mensaje 2",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaSemana(s1) == -1){
+                    Toast.makeText(this, "Error al añadir setmana 1",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaSemana(s2) == -1){
+                    Toast.makeText(this, "Error al añadir setmana 2",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaSemana(s3) == -1){
+                    Toast.makeText(this, "Error al añadir setmana 3",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaSemana(s4) == -1){
+                    Toast.makeText(this, "Error al añadir setmana 4",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaSemana(s5) == -1){
+                    Toast.makeText(this, "Error al añadir setmana 5",
+                            Toast.LENGTH_SHORT).show();
+                }if(db.insertaSemana(s6) == -1){
+                    Toast.makeText(this, "Error al añadir setmana 5",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                db.close();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } finally {
+                PreferencesHelper.setBaseDeDatos(this);
+            }
+        }
         super.onCreate(savedInstanceState);
         if(PreferencesHelper.recuperarUsuari("User", this) == null){
             startActivityForResult(new Intent(this, LoginActivity.class), 11);

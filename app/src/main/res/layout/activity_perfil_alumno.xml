@@ -37,17 +37,21 @@
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="Añadir tarea"
-                android:onClick="tarea"/>
+                android:onClick="tarea"
+                android:text="Añadir tarea" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:text="enviar mensaje"
-                android:onClick="mensaje"/>
+                android:onClick="mensaje"
+                android:text="enviar mensaje" />
         </LinearLayout>
 
         <LinearLayout
@@ -70,6 +74,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
+                android:onClick="correo"
                 android:text="correo@electronico.com"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textSize="18sp" />
@@ -98,7 +103,8 @@
                 android:layout_weight="7"
                 android:text="correo@electronico.com"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="empresa"/>
 
         </LinearLayout>
 

@@ -1,6 +1,7 @@
 package com.valentelmadafaka.gesmobapp.ui.empresa;
 
 import android.app.Application;
+import android.content.Intent;
 import android.database.Cursor;
 
 import androidx.annotation.NonNull;
@@ -74,5 +75,12 @@ public class EmpresaViewModel extends AndroidViewModel {
         cursor.moveToFirst();
         db.close();
         return cursor.getString(3);
+    }
+
+    public String getDireccionAlumno(){
+        db.open();
+        Cursor c = db.obtenerAlumno(Integer.parseInt(alumno.getId()));
+        c.moveToFirst();
+        return c.getString(2);
     }
 }

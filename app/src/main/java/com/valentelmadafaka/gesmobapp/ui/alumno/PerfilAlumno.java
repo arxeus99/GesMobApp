@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.valentelmadafaka.gesmobapp.model.SemanaArray;
 import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.ui.calendario.SemanaDetalle;
+import com.valentelmadafaka.gesmobapp.ui.empresa.EmpresaDetail;
 import com.valentelmadafaka.gesmobapp.ui.mensajeria.Mensajeria;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaForm;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
@@ -30,6 +32,7 @@ public class PerfilAlumno extends AppCompatActivity {
 
     ArrayList<Semana> semanas = new ArrayList<>();
     Usuario alumno;
+    TextView correo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class PerfilAlumno extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_alumno);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         alumno = (Usuario)getIntent().getSerializableExtra("alumno");
+        correo = findViewById(R.id.correoAlumno);
         TextView nombre = findViewById(R.id.nombreAlumno);
         TextView correo = findViewById(R.id.correoAlumno);
         TextView empresa = findViewById(R.id.empresaAlumno);
@@ -115,5 +119,17 @@ public class PerfilAlumno extends AppCompatActivity {
             }
             gesMobDB.close();
         }
+    }
+
+    public void correo(View view) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", correo.getText().toString(), null));
+        startActivity(Intent.createChooser(intent, "Send email..."));
+
+    }
+
+    public void empresa(View view) {
+        Intent intent = new Intent(this, EmpresaDetail.class);
+        intent.putExtra("alumno", alumno);
+        startActivity(intent);
     }
 }

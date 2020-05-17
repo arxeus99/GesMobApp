@@ -2,6 +2,8 @@ package com.valentelmadafaka.gesmobapp.ui.profesor;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,7 +31,14 @@ public class ProfesorFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_profesor, container, false);
         mViewModel = ViewModelProviders.of(this).get(ProfesorViewModel.class);
         TextView nombre = root.findViewById(R.id.nombreProfesor);
-        TextView email = root.findViewById(R.id.correoProfesor);
+        final TextView email = root.findViewById(R.id.correoProfesor);
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", email.getText().toString(), null));
+                startActivity(Intent.createChooser(intent, "Send email..."));
+            }
+        });
         nombre.setText(mViewModel.getNombreProfesor());
         email.setText(mViewModel.getCorreoProfesor());
         return root;

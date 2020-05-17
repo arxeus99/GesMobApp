@@ -44,4 +44,16 @@ public class PreferencesHelper {
         editor.clear();
         editor.apply();
     }
+
+    public static boolean isBaseDeDatos(Context context){
+        SharedPreferences prefs = context.getSharedPreferences("BaseDeDatos", Context.MODE_PRIVATE);
+        return prefs.getBoolean("BaseDeDatos", false);
+    }
+
+    public static void setBaseDeDatos(Context context){
+        SharedPreferences prefs = context.getSharedPreferences("BaseDeDatos", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("BaseDeDatos", true);
+        editor.apply();
+    }
 }
