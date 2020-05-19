@@ -38,6 +38,7 @@ public class TareaForm extends AppCompatActivity {
     GesMobDB gesMobDB;
     Usuario alumno;
     ArrayList<Tarea> tareas = new ArrayList<>();
+    final ArrayList<String> nombresAlumnos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,6 @@ public class TareaForm extends AppCompatActivity {
             destinatarios = findViewById(R.id.destinatariosText);
             gesMobDB = new GesMobDB(this);
             gesMobDB.open();
-            final ArrayList<String> nombresAlumnos = new ArrayList<>();
             Cursor c = gesMobDB.obtenerAlumnosDeProfeosor(Integer.parseInt(usuario.getId()));
             c.moveToFirst();
             while(!c.isAfterLast()){
@@ -115,23 +115,38 @@ public class TareaForm extends AppCompatActivity {
                 gesMobDB = new GesMobDB(this);
                 gesMobDB.open();
                 if(getIntent().getExtras().getBoolean("destinatarios")){
-                    String input = destinatarios.getText().toString().trim();
-                    String[] personas = input.split("\\s*,\\s*");
-                    for(int i=1; i<personas.length+1; i++){
-                        Tarea tarea = new Tarea();
-                        tarea.setId((gesMobDB.obtenerNumeroTareas()+i)+"");
-                        tarea.setNombre(titulo.getText().toString());
-                        tarea.setDescripcion(descripcion.getText().toString());
-                        tarea.setHoras(Integer.parseInt(horas.getText().toString()));
-                        tarea.setIdProfesor(usuario.getId());
-                        Cursor c = gesMobDB.obtenerUsuario(personas[i-1]);
-                        c.moveToFirst();
-                        tarea.setIdAlumno(c.getString(0));
-                        tarea.setRealizada(false);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                        String currentDate = simpleDateFormat.format(new Date());
-                        tarea.setFecha(currentDate);
-                        tareas.add(tarea);
+                    if(destinatarios.getText().toString().isEmpty()){
+                        Snackbar.make(view, "No puede dejar ningun espacio en blanco", Snackbar.LENGTH_LONG).show();
+                    }else{
+                        boolean encontrado = false;
+                        String input = destinatarios.getText().toString().trim();
+                        String[] personas = input.split("\\s*,\\s*");
+                        for(int i=1; i<personas.length+1; i++){
+                            for(String s : nombresAlumnos){
+                                if(personas[i-1].equals(s)){
+                                    encontrado = true;
+                                }
+                            }
+
+                            if(encontrado){
+                                Tarea tarea = new Tarea();
+                                tarea.setId((gesMobDB.obtenerNumeroTareas()+i)+"");
+                                tarea.setNombre(titulo.getText().toString());
+                                tarea.setDescripcion(descripcion.getText().toString());
+                                tarea.setHoras(Integer.parseInt(horas.getText().toString()));
+                                tarea.setIdProfesor(usuario.getId());
+                                Cursor c = gesMobDB.obtenerUsuario(personas[i-1]);
+                                c.moveToFirst();
+                                tarea.setIdAlumno(c.getString(0));
+                                tarea.setRealizada(false);
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                                String currentDate = simpleDateFormat.format(new Date());
+                                tarea.setFecha(currentDate);
+                                tareas.add(tarea);
+                            }else{
+                                Snackbar.make(view, "Alumno no encontrado", Snackbar.LENGTH_LONG).show();
+                            }
+                        }
                     }
                 }else{
                     t = new Tarea();

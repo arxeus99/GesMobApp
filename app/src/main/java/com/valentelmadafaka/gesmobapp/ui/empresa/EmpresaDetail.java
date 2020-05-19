@@ -1,11 +1,13 @@
 package com.valentelmadafaka.gesmobapp.ui.empresa;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ public class EmpresaDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.empresa_fragment);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         alumno = (Usuario)getIntent().getSerializableExtra("alumno");
 
@@ -81,5 +84,14 @@ public class EmpresaDetail extends AppCompatActivity {
         gesMobDB.close();
 
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

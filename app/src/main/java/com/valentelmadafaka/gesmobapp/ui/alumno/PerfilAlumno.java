@@ -110,7 +110,7 @@ public class PerfilAlumno extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode == 11){
+        if(requestCode == 11 && resultCode == RESULT_OK){
             Tarea t = (Tarea) data.getExtras().get("tarea");
             GesMobDB gesMobDB = new GesMobDB(this);
             gesMobDB.open();
