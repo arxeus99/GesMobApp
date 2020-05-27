@@ -66,15 +66,19 @@ public class TareaForm extends AppCompatActivity {
                 c.moveToNext();
             }
             gesMobDB.close();
-            final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nombresAlumnos);
+            final ArrayList<String> nombresAlumnos2 = new ArrayList<>();
+            for(String s : nombresAlumnos){
+                nombresAlumnos2.add(s);
+            }
+            final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nombresAlumnos2);
             destinatarios.setAdapter(adapter);
             destinatarios.setThreshold(0);
             destinatarios.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
             destinatarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    adapter.remove(nombresAlumnos.get(position));
-                    nombresAlumnos.remove(position);
+                    adapter.remove(nombresAlumnos2.get(position));
+                    nombresAlumnos2.remove(position);
                     adapter.notifyDataSetChanged();
                 }
             });
@@ -91,6 +95,7 @@ public class TareaForm extends AppCompatActivity {
     }
 
     public void crearVoid(View view){
+        boolean creada = false;
         if(titulo.getText().toString().isEmpty() || descripcion.getText().toString().isEmpty() || horas.getText().toString().isEmpty()){
             Snackbar.make(view, "No puede dejar ningun espacio en blanco", Snackbar.LENGTH_LONG).show();
         }else{
@@ -111,6 +116,7 @@ public class TareaForm extends AppCompatActivity {
                 String currentDate = simpleDateFormat.format(new Date());
                 t.setFecha(currentDate);
                 gesMobDB.close();
+                creada = true;
             }else{
                 gesMobDB = new GesMobDB(this);
                 gesMobDB.open();
@@ -143,6 +149,7 @@ public class TareaForm extends AppCompatActivity {
                                 String currentDate = simpleDateFormat.format(new Date());
                                 tarea.setFecha(currentDate);
                                 tareas.add(tarea);
+                                creada = true;
                             }else{
                                 Snackbar.make(view, "Alumno no encontrado", Snackbar.LENGTH_LONG).show();
                             }
@@ -160,11 +167,16 @@ public class TareaForm extends AppCompatActivity {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                     String currentDate = simpleDateFormat.format(new Date());
                     t.setFecha(currentDate);
+                    creada = true;
                 }
                 gesMobDB.close();
             }
 
-            finish();
+            if(creada){
+                Toast.makeText(this, "Tarea creada con exito", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
         }
     }
 

@@ -29,7 +29,7 @@ public class TareaDetail extends AppCompatActivity {
 
     Tarea tarea;
     TextView titulo, descripcion, duracion;
-    Button observacion;
+    Button observacion, finalizar;
     GesMobDB db;
     ListView listView;
     Boolean cambiada = false;
@@ -44,7 +44,11 @@ public class TareaDetail extends AppCompatActivity {
         descripcion = findViewById(R.id.descripcionTarea);
         duracion = findViewById(R.id.duracionTarea);
         observacion = findViewById(R.id.añadirObservacion);
-
+        finalizar = findViewById(R.id.finalizada);
+        if(PreferencesHelper.recuperarUsuari("User", this).getTipo().equals("profesor")) {
+            finalizar.setEnabled(false);
+            finalizar.setVisibility(View.INVISIBLE);
+        }
         titulo.setText(tarea.getNombre());
         descripcion.setText(tarea.getDescripcion());
         duracion.setText(tarea.getHoras()+"h");
