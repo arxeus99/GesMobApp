@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.valentelmadafaka.gesmobapp">
 
     <application
@@ -13,25 +14,41 @@
         <activity android:name=".ui.empresa.EmpresaDetail"></activity>
         <activity
             android:name=".ui.mensajeria.Chats"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:label="Chats" />
         <activity
             android:name=".ui.alumno.PerfilAlumno"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:label="Perfil de Alumno" />
         <activity
             android:name=".ui.calendario.SemanaDetalle"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:label="Detalle Semana" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.tareas.TareaDetail"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:label="Tarea en Detalle" />
         <activity
             android:name=".ui.tareas.TareaForm"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:label="Crear nueva tarea" />
         <activity
             android:name=".ui.mensajeria.Mensajeria"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:label="Chat" />
         <activity
             android:name=".MainActivity"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

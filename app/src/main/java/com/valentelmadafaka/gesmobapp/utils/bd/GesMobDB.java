@@ -154,7 +154,7 @@ public class GesMobDB {
     }
 
     public Cursor obtenerUsuario(String nombre){
-        Cursor cursor = bd.query(true, TAB_USUARIO, new String[]{USUARIO_ID, USUARIO_NOMBRE, USUARIO_EMAIL, USUARIO_TIPO}, USUARIO_NOMBRE + " LIKE '" + nombre + "%'", null, null, null, null, null);
+        Cursor cursor = bd.query(true, TAB_USUARIO, new String[]{USUARIO_ID, USUARIO_NOMBRE, USUARIO_EMAIL, USUARIO_TIPO}, USUARIO_NOMBRE + " LIKE '" + nombre + "'", null, null, null, null, null);
         return cursor;
     }
 
