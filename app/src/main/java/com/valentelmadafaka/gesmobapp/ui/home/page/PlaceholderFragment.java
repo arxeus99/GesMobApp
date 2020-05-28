@@ -33,6 +33,7 @@ import org.w3c.dom.Text;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
@@ -191,6 +192,9 @@ public class PlaceholderFragment extends Fragment {
     }
 
     public static boolean saberFecha(Date inicio, Date fin, Date actual){
-        return inicio.compareTo(actual) * actual.compareTo(fin) >=0;
+        fin.setHours(23);
+        fin.setMinutes(59);
+        fin.setSeconds(59);
+        return !(actual.before(inicio) || actual.after(fin));
     }
 }
