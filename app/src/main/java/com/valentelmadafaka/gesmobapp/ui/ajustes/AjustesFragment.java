@@ -38,7 +38,9 @@ public class AjustesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 PreferencesHelper.borrarUsuario(getActivity());
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                Intent intent = getActivity().getIntent();
+                getActivity().finish();
+                startActivity(intent);
             }
         });
         TextView nombre = root.findViewById(R.id.nombreUsuario);
