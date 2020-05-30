@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.valentelmadafaka.gesmobapp.model.Tarea;
 import com.valentelmadafaka.gesmobapp.model.TareaArray;
 import com.valentelmadafaka.gesmobapp.model.Usuario;
 import com.valentelmadafaka.gesmobapp.ui.tareas.TareaDetail;
+import com.valentelmadafaka.gesmobapp.ui.tareas.TareaForm;
 import com.valentelmadafaka.gesmobapp.utils.bd.GesMobDB;
 import com.valentelmadafaka.gesmobapp.utils.shared_preferences.PreferencesHelper;
 
@@ -110,6 +112,17 @@ public class SemanaDetalle extends AppCompatActivity {
                 intent.putExtra("tarea", tarea);
                 startActivityForResult(intent, 10);
 
+            }
+        });
+
+        final Button crearTarea = findViewById(R.id.crearTareaButton);
+        crearTarea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SemanaDetalle.this, TareaForm.class);
+                intent.putExtra("destinatarios", false);
+                intent.putExtra("fecha", semana.getInicio());
+                startActivityForResult(intent, 11);
             }
         });
 

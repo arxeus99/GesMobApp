@@ -38,6 +38,7 @@ public class TareaForm extends AppCompatActivity {
     GesMobDB gesMobDB;
     Usuario alumno;
     ArrayList<Tarea> tareas = new ArrayList<>();
+    String fecha;
     final ArrayList<String> nombresAlumnos = new ArrayList<>();
 
     @Override
@@ -51,6 +52,7 @@ public class TareaForm extends AppCompatActivity {
         horas = findViewById(R.id.duracionTarea);
         linearLayout = findViewById(R.id.destinatarios);
         alumno = (Usuario)getIntent().getSerializableExtra("alumno");
+        fecha = getIntent().getExtras().getString("fecha");
         if(!getIntent().getExtras().getBoolean("destinatarios")){
             linearLayout.setVisibility(View.INVISIBLE);
         }else{
@@ -112,9 +114,13 @@ public class TareaForm extends AppCompatActivity {
                 t.setIdProfesor(c.getString(3));
                 t.setIdAlumno(usuario.getId());
                 t.setRealizada(false);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                String currentDate = simpleDateFormat.format(new Date());
-                t.setFecha(currentDate);
+                if(fecha == null){
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    String currentDate = simpleDateFormat.format(new Date());
+                    t.setFecha(currentDate);
+                }else{
+                    t.setFecha(fecha);
+                }
                 gesMobDB.close();
                 creada = true;
             }else{
@@ -145,9 +151,13 @@ public class TareaForm extends AppCompatActivity {
                                 c.moveToFirst();
                                 tarea.setIdAlumno(c.getString(0));
                                 tarea.setRealizada(false);
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                                String currentDate = simpleDateFormat.format(new Date());
-                                tarea.setFecha(currentDate);
+                                if(fecha == null){
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                                    String currentDate = simpleDateFormat.format(new Date());
+                                    t.setFecha(currentDate);
+                                }else{
+                                    t.setFecha(fecha);
+                                }
                                 tareas.add(tarea);
                                 creada = true;
                             }else{
@@ -164,9 +174,13 @@ public class TareaForm extends AppCompatActivity {
                     t.setIdProfesor(usuario.getId());
                     t.setIdAlumno(alumno.getId());
                     t.setRealizada(false);
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    String currentDate = simpleDateFormat.format(new Date());
-                    t.setFecha(currentDate);
+                    if(fecha == null){
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        String currentDate = simpleDateFormat.format(new Date());
+                        t.setFecha(currentDate);
+                    }else{
+                        t.setFecha(fecha);
+                    }
                     creada = true;
                 }
                 gesMobDB.close();
