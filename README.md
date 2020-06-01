@@ -25,7 +25,9 @@ Una vez tengais esa opción activada solo hay que ejecutar el archivo y la aplic
 En la base de datos ya hay introducidos 3 usuarios 
 
 >Alumno1
+
 >Alumno2
+
 >Profesor
 
 Los tres tienen la misma contraseña
