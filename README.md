@@ -7,6 +7,7 @@ Consiste en un gestor de tareas para los alumnos que realizan las practicas en E
 
 Para clonar el repositorio tendréis que tener instalado git en vuestro dispositivo. Una vez lo tengais instalado abrís el CMD, nevegais hasta la carpeta de destino donde quereis clonar el repositorio y escribis 
 >git clone https://github.com/arxeus99/GesMobApp.git
+
 y pulsais enter. Con esto ya tendréis el proyecto en vuestro ordenador
 
 ## Cómo instalar
