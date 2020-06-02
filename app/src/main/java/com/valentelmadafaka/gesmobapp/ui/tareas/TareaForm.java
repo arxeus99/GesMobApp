@@ -154,9 +154,9 @@ public class TareaForm extends AppCompatActivity {
                                 if(fecha == null){
                                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                                     String currentDate = simpleDateFormat.format(new Date());
-                                    t.setFecha(currentDate);
+                                    tarea.setFecha(currentDate);
                                 }else{
-                                    t.setFecha(fecha);
+                                    tarea.setFecha(fecha);
                                 }
                                 tareas.add(tarea);
                                 creada = true;
