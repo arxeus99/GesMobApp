@@ -45,6 +45,8 @@ public class HomeFragment extends Fragment {
     TareaArray tareaArray;
     AlumnoArray alumnoArray;
     Usuario usuario;
+    Semana semana;
+    TextView info;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class HomeFragment extends Fragment {
 
                 final TextView textView = root.findViewById(R.id.semana);
                 final TextView fechas = root.findViewById(R.id.fechas);
-                final TextView info = root.findViewById(R.id.info);
+                info = root.findViewById(R.id.info);
                 GesMobDB gesMobDB;
 
                 boolean fueraDeFechas = true;
@@ -70,6 +72,7 @@ public class HomeFragment extends Fragment {
                 for(Semana s : homeViewModel.getSemanas()){
                     try {
                         if(saberFecha(dateFormat.parse(s.getInicio()), dateFormat.parse(s.getFin()), fechaDeHoy)){
+                            semana = s;
                             fueraDeFechas = false;
                             textView.setText("Semana "+s.getId());
                             fechas.setText(s.getInicio()+" - "+s.getFin());
@@ -216,6 +219,18 @@ public class HomeFragment extends Fragment {
                     gesMobDB.close();
                     tareas.add(t);
                     tareaArray.notifyDataSetChanged();
+                    int horasEnTareas = 0;
+                    for(Tarea tarea : tareas){
+                        horasEnTareas += tarea.getHoras();
+                    }
+
+                    if(semana.getHoras()> horasEnTareas){
+                        info.setText("Aun no tienes suficientes horas en tareas");
+                    }else if(semana.getHoras() == horasEnTareas){
+                        info.setText("Tienes exactamente las horas necesarias en tareas de la semana");
+                    }else{
+                        info.setText("Tienes horas en tareas de más");
+                    }
                 }
             }else if(resultCode == 11){
                 ArrayList<Tarea> tareasRecibidas = (ArrayList<Tarea>)data.getExtras().get("tareas");

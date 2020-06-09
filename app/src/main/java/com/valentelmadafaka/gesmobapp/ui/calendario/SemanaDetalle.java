@@ -144,6 +144,19 @@ public class SemanaDetalle extends AppCompatActivity {
                 gesMobDB.close();
                 tareas.add(t);
                 tareaArray.notifyDataSetChanged();
+                
+                int horasEnTareas = 0;
+                for(Tarea tarea : tareas){
+                    horasEnTareas += tarea.getHoras();
+                }
+
+                if(semana.getHoras()> horasEnTareas){
+                    info.setText("Aun no tienes suficientes horas en tareas");
+                }else if(semana.getHoras() == horasEnTareas){
+                    info.setText("Tienes exactamente las horas necesarias en tareas de la semana");
+                }else{
+                    info.setText("Tienes horas en tareas de más");
+                }
 
             }
         } else if (resultCode == RESULT_OK && requestCode == 10) {
